@@ -1,29 +1,32 @@
 package com.solvd.pages.admin;
 
-import com.solvd.pages.AbstractMenuPage;
+import com.solvd.pages.LeftMenu;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.gui.AbstractPage;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class JobListPage extends AbstractMenuPage {
+public class JobListPage extends AbstractPage {
     @FindBy(xpath = "//i[contains(@class, 'bi-plus')]/parent::button")
-    private WebElement addJobButton;
+    private ExtendedWebElement addJobButton;
     @FindBy(xpath = "//div[@class = 'oxd-table-card']/*")
-    private List<WebElement> jobList;
+    private List<ExtendedWebElement> jobList;
+    @Getter
+    private LeftMenu leftMenu;
 
     public JobListPage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public AddJobPage clickAddJobButton() {
-        clickWrapper(addJobButton);
-        return new AddJobPage(webDriver);
+        addJobButton.click();
+        return new AddJobPage(getDriver());
     }
 
-    public List<WebElement> getJobList() {
-        loadWebElementList(jobList);
+    public List<ExtendedWebElement> getJobList() {
         return jobList;
     }
 

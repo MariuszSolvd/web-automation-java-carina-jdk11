@@ -1,48 +1,55 @@
 package com.solvd.pages.pim;
 
 import com.solvd.model.Employee;
-import com.solvd.pages.AbstractMenuPage;
+import com.solvd.pages.LeftMenu;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.gui.AbstractPage;
+import lombok.Getter;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
-public class AddEmployeePage extends AbstractMenuPage {
+public class AddEmployeePage extends AbstractPage {
 
     @FindBy(name = "firstName")
-    private WebElement fistNameField;
+    private ExtendedWebElement fistNameField;
     @FindBy(name = "middleName")
-    private WebElement middleNameField;
+    private ExtendedWebElement middleNameField;
     @FindBy(name = "lastName")
-    private WebElement lastNameField;
+    private ExtendedWebElement lastNameField;
     @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
-    private WebElement idEmployeeField;
+    private ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//button[@type = 'submit']")
-    private WebElement saveButton;
+    private ExtendedWebElement saveButton;
+    @Getter
+    LeftMenu leftMenu;
 
     public AddEmployeePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public void inputFirstName(String firstName) {
-        sendKeysWrapper(fistNameField, firstName);
+        fistNameField.type(firstName);
     }
 
     public void inputMiddleName(String middleName) {
-        sendKeysWrapper(middleNameField, middleName);
+        middleNameField.type(middleName);
     }
 
     public void inputLastName(String lastName) {
-        sendKeysWrapper(lastNameField, lastName);
+        lastNameField.type(lastName);
     }
 
     public void inputIdEmployee(String id) {
-        cleanTextboxWrapper(idEmployeeField);
-        sendKeysWrapper(idEmployeeField, id);
+        //TODO :Check out if clean work with sendKeys or has to use type method
+        idEmployeeField.click();
+        idEmployeeField.sendKeys(Keys.CONTROL + "a");
+        idEmployeeField.sendKeys(Keys.BACK_SPACE);
+        idEmployeeField.type(id);
     }
 
     public void clickSaveButton() {
-        clickWrapper(saveButton);
+        saveButton.click();
     }
 
     public EmployeePage addEmployee(Employee employee) {
@@ -51,9 +58,8 @@ public class AddEmployeePage extends AbstractMenuPage {
         inputLastName(employee.getLastName());
         inputIdEmployee(employee.getIdEmployee());
         clickSaveButton();
-        EmployeePage employeePage = new EmployeePage(webDriver);
-        employeePage.waitToPageToLoad();
-        return employeePage;
+        //TODO: Check during test if wait for it is enough in Carina
+        return new EmployeePage(getDriver());
     }
 
 }

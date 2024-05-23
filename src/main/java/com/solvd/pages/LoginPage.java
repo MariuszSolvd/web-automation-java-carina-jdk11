@@ -1,39 +1,39 @@
 package com.solvd.pages;
 
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends AbstractPage {
 
     @FindBy(name = "username")
-    private WebElement usernameField;
+    private ExtendedWebElement usernameField;
     @FindBy(name = "password")
-    private WebElement passwordField;
+    private ExtendedWebElement passwordField;
     @FindBy(xpath = "//button")
-    private WebElement loginButton;
+    private ExtendedWebElement loginButton;
     @FindBy(xpath = "//div[@role = 'alert']")
-    private WebElement alertField;
+    private ExtendedWebElement alertField;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
+        setPageURL("/auth/login");
     }
 
     public void inputUsername(String username) {
-        sendKeysWrapper(usernameField, username);
+        usernameField.type(username);
     }
 
     public void inputPassword(String password) {
-        sendKeysWrapper(passwordField, password);
+        passwordField.type(password);
     }
 
     public void clickLoginButton() {
-        clickWrapper(loginButton);
+        loginButton.click();
     }
 
     public boolean isAlertVisible() {
-        webDriverWait.until(ExpectedConditions.visibilityOf(alertField));
         return alertField.isDisplayed();
     }
 

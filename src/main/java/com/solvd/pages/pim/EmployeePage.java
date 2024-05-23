@@ -1,29 +1,33 @@
 package com.solvd.pages.pim;
 
-import com.solvd.pages.AbstractMenuPage;
+import com.solvd.pages.LeftMenu;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.gui.AbstractPage;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
-
-
-public class EmployeePage extends AbstractMenuPage {
+public class EmployeePage extends AbstractPage {
 
     @FindBy(name = "firstName")
-    private WebElement firstNameField;
+    private ExtendedWebElement firstNameField;
     @FindBy(name = "middleName")
-    private WebElement middleNameField;
+    private ExtendedWebElement middleNameField;
     @FindBy(name = "lastName")
-    private WebElement lastNameField;
+    private ExtendedWebElement lastNameField;
     @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
-    private WebElement idEmployeeField;
+    private ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//div[contains(@class, 'employee-navigation')]")
-    private WebElement employeeNav;
+    private ExtendedWebElement employeeNav;
+    @Getter
+    private LeftMenu leftMenu;
 
     public EmployeePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public LeftMenu getLeftMenu() {
+        return leftMenu;
     }
 
     public String getFirstNameText() {
@@ -42,24 +46,8 @@ public class EmployeePage extends AbstractMenuPage {
         return getValueWrapper(idEmployeeField);
     }
 
-    public void waitToPageToLoad() {
-        webDriverWait.until(ExpectedConditions.visibilityOf(employeeNav));
-        webDriverWait.until(ExpectedConditions.visibilityOf(firstNameField));
-        webDriverWait.until(ExpectedConditions.visibilityOf(middleNameField));
-        webDriverWait.until(ExpectedConditions.visibilityOf(lastNameField));
-        webDriverWait.until(ExpectedConditions.visibilityOf(idEmployeeField));
-    }
-
-    public boolean isOpen() {
-        for (WebElement element : getAllElements()) {
-            if (!element.isDisplayed()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private List<WebElement> getAllElements() {
-        return List.of(employeeNav, firstNameField, middleNameField, lastNameField, idEmployeeField);
+    private String getValueWrapper(ExtendedWebElement element) {
+        //TODO: Check if it waits for value attribute during test
+        return element.getAttribute("value");
     }
 }
