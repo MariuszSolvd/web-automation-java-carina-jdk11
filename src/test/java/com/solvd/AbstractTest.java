@@ -1,4 +1,4 @@
-package com.slovd;
+package com.solvd;
 
 import com.solvd.pages.DashboardPage;
 import com.solvd.service.LoginService;

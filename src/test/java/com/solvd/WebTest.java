@@ -1,4 +1,4 @@
-package com.slovd;
+package com.solvd;
 
 import com.solvd.mapper.EmployeeMapper;
 import com.solvd.mapper.JobMapper;
