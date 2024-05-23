@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.solvd</groupId>
+    <artifactId>web-automation-java-carina</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <testng.ver>7.10.2</testng.ver>
+        <slf4j.ver>1.7.36</slf4j.ver>
+        <log4j.ver>2.23.1</log4j.ver>
+        <lombok.ver>1.18.32</lombok.ver>
+        <carina-core.ver>1.2.10</carina-core.ver>
+        <carina-api.ver>1.2.4</carina-api.ver>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.ver}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.zebrunner</groupId>
+            <artifactId>carina-api</artifactId>
+            <version>${carina-api.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zebrunner</groupId>
+            <artifactId>carina-core</artifactId>
+            <version>${carina-core.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.ver}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.ver}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
