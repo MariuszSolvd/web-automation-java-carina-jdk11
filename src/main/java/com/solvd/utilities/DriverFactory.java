@@ -1,5 +1,6 @@
 package com.solvd.utilities;
 
+import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -17,7 +18,7 @@ public class DriverFactory {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
-            String seleniumHubUrl = get("selenium.url");
+            String seleniumHubUrl = R.CONFIG.get("selenium.url");
             webDriver = new RemoteWebDriver(new URI(seleniumHubUrl).toURL(), capabilities);
         } catch (URISyntaxException | MalformedURLException e) {
             throw new RuntimeException("Could not connect to Selenium Grid Hub");
