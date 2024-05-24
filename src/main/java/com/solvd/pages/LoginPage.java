@@ -1,5 +1,6 @@
 package com.solvd.pages;
 
+import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,8 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
-        setPageURL();
+        setPageURL(R.CONFIG.get("login.url"));
+        open();
     }
 
     public void inputUsername(String username) {
@@ -37,10 +39,11 @@ public class LoginPage extends AbstractPage {
         return alertField.isDisplayed();
     }
 
-    public void logIn(String username, String password) {
+    public DashboardPage logIn(String username, String password) {
         inputUsername(username);
         inputPassword(password);
         clickLoginButton();
+        return new DashboardPage(getDriver());
     }
 }
 

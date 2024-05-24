@@ -14,7 +14,10 @@ import com.solvd.pages.pim.PimPage;
 import com.solvd.service.EmployeeService;
 import com.solvd.service.JobService;
 import com.solvd.utilities.EmployeeWrapper;
+import com.zebrunner.carina.core.AbstractTest;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -22,16 +25,16 @@ import java.util.List;
 
 import static com.solvd.utilities.Urls.*;
 import static org.testng.Assert.assertTrue;
-
 public class WebTest extends AbstractTest {
+
+
 
     //Test case 1
     @Test(testName = "T1", threadPoolSize = 1, invocationCount = 1)
     public void shouldLogin() {
-        webDriver.get().get(LOGIN_PAGE_URL);
-        LoginPage loginPage = new LoginPage(webDriver.get());
-        loginPage.logIn("Admin", "admin123");
-        assertSuccessfulLogin(webDriver.get().getCurrentUrl());
+        LoginPage loginPage = new LoginPage(getDriver(browser));
+        DashboardPage dashboardPage = loginPage.logIn("Admin", "admin123");
+        dashboardPage.isPageOpened();
     }
 
 //    //Test case 2

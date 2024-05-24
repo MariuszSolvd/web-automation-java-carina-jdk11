@@ -1,6 +1,6 @@
 package com.solvd;
 
-import com.zebrunner.carina.utils.R;
+import static com.solvd.utilities.Urls.*;
 
 public class Main {
     public static void main(String[] args) {
