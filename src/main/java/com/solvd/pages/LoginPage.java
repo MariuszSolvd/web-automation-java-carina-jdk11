@@ -18,7 +18,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
-        setPageURL("/auth/login");
+        setPageURL();
     }
 
     public void inputUsername(String username) {
