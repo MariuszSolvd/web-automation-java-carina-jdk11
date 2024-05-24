@@ -32,7 +32,7 @@ public class WebTest extends AbstractTest {
     //Test case 1
     @Test(testName = "T1", threadPoolSize = 1, invocationCount = 1)
     public void shouldLogin() {
-        LoginPage loginPage = new LoginPage(getDriver(browser));
+        LoginPage loginPage = new LoginPage(getDriver());
         DashboardPage dashboardPage = loginPage.logIn("Admin", "admin123");
         dashboardPage.isPageOpened();
     }
