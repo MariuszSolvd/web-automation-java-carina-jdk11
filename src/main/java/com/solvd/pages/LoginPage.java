@@ -3,7 +3,6 @@ package com.solvd.pages;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,18 +33,6 @@ public class LoginPage extends AbstractPage {
 
     public void clickLoginButton() {
         loginButton.click();
-    }
-
-    public void test() {
-        System.out.println("---TESTING AREA---");
-        System.out.println("ELEMENT CHECK:");
-        System.out.println(alertField.getElement());
-        System.out.println("SET ELEMENT:");
-        alertField.setElement(getDriver().findElement(By.xpath("//div[@role = 'alert']")));
-        System.out.println("ELEMENT CHECK AFTER SET:");
-        System.out.println(alertField.getElement());
-        waitUntil(ExpectedConditions.visibilityOf(alertField), 5);
-        System.out.println("ELEMENT CHECK:");
     }
 
     public boolean isAlertDisplayed() {
