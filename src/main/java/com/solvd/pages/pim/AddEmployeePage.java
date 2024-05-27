@@ -1,15 +1,13 @@
 package com.solvd.pages.pim;
 
 import com.solvd.model.Employee;
-import com.solvd.pages.LeftMenu;
+import com.solvd.pages.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import lombok.Getter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class AddEmployeePage extends AbstractPage {
+public class AddEmployeePage extends AbstractPageWithLeftMenu {
 
     @FindBy(name = "firstName")
     private ExtendedWebElement fistNameField;
@@ -21,8 +19,6 @@ public class AddEmployeePage extends AbstractPage {
     private ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//button[@type = 'submit']")
     private ExtendedWebElement saveButton;
-    @Getter
-    LeftMenu leftMenu;
 
     public AddEmployeePage(WebDriver webDriver) {
         super(webDriver);

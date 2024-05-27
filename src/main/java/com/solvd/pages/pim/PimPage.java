@@ -1,16 +1,14 @@
 package com.solvd.pages.pim;
 
-import com.solvd.pages.LeftMenu;
+import com.solvd.pages.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import lombok.Getter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class PimPage extends AbstractPage {
+public class PimPage extends AbstractPageWithLeftMenu {
 
     @FindBy(xpath = "//button[contains(., 'Add')]")
     private ExtendedWebElement addEmployeeButton;
@@ -22,8 +20,6 @@ public class PimPage extends AbstractPage {
     private ExtendedWebElement deleteConfirmationButton;
     @FindBy(xpath = "//div[@class ='oxd-table-card']/*")
     private List<ExtendedWebElement> employeeList;
-    @Getter
-    private LeftMenu leftMenu;
 
     public PimPage(WebDriver webDriver) {
         super(webDriver);

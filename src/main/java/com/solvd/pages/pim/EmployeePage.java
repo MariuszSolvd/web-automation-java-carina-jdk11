@@ -1,13 +1,12 @@
 package com.solvd.pages.pim;
 
+import com.solvd.pages.AbstractPageWithLeftMenu;
 import com.solvd.pages.LeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class EmployeePage extends AbstractPage {
+public class EmployeePage extends AbstractPageWithLeftMenu {
 
     @FindBy(name = "firstName")
     private ExtendedWebElement firstNameField;
@@ -19,8 +18,6 @@ public class EmployeePage extends AbstractPage {
     private ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//div[contains(@class, 'employee-navigation')]")
     private ExtendedWebElement employeeNav;
-    @Getter
-    private LeftMenu leftMenu;
 
     public EmployeePage(WebDriver webDriver) {
         super(webDriver);

@@ -5,16 +5,12 @@ import com.solvd.mapper.JobMapper;
 import com.solvd.model.Employee;
 import com.solvd.model.Job;
 import com.solvd.pages.*;
-import com.solvd.pages.admin.AddJobPage;
-import com.solvd.pages.admin.AdminPage;
-import com.solvd.pages.admin.JobListPage;
-import com.solvd.pages.pim.AddEmployeePage;
-import com.solvd.pages.pim.EmployeePage;
-import com.solvd.pages.pim.PimPage;
 import com.solvd.service.EmployeeService;
 import com.solvd.service.JobService;
+import com.solvd.service.LoginService;
 import com.solvd.utilities.EmployeeWrapper;
 import com.zebrunner.carina.core.AbstractTest;
+import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Parameters;
@@ -25,6 +21,7 @@ import java.util.List;
 
 import static com.solvd.utilities.Urls.*;
 import static org.testng.Assert.assertTrue;
+
 public class WebTest extends AbstractTest {
 
 
@@ -33,23 +30,25 @@ public class WebTest extends AbstractTest {
     @Test(testName = "T1", threadPoolSize = 1, invocationCount = 1)
     public void shouldLogin() {
         LoginPage loginPage = new LoginPage(getDriver());
-        DashboardPage dashboardPage = loginPage.logIn("Admin", "admin123");
+        loginPage.open();
+        loginPage.logIn(R.TESTDATA.get("correct_user"), R.TESTDATA.get("correct_password"));
+        DashboardPage dashboardPage = new DashboardPage(getDriver());
         dashboardPage.isPageOpened();
     }
 
-//    //Test case 2
-//    @Test(testName = "T2", threadPoolSize = 1, invocationCount = 1)
-//    public void shouldNotLogin() {
-//        webDriver.get().get(LOGIN_PAGE_URL);
-//        LoginPage loginPage = new LoginPage(webDriver.get());
-//        loginPage.logIn("User", "12345");
-//        assertTrue(loginPage.isAlertVisible());
-//    }
-
+    //Test case 2
+    @Test(testName = "T2", threadPoolSize = 1, invocationCount = 1)
+    public void shouldNotLogin() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.open();
+        loginPage.logIn(R.TESTDATA.get("incorrect_user"), R.TESTDATA.get("incorrect_password"));
+        assertTrue(loginPage.isAlertDisplayed(), "Alert is not visible");
+    }
+//
 //    //Test case 3
 //    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 1)
 //    public void shouldAddEmployee() {
-//        DashboardPage dashboardPage = login();
+//        DashboardPage dashboardPage = LoginService.successfulLogin()
 //        assertSuccessfulLogin(dashboardPage.getUrl());
 //        dashboardPage.clickMenuButtonByHref(PIM_PAGE_URL);
 //        PimPage pimPage = new PimPage(webDriver.get());

@@ -6,10 +6,10 @@
             <class name="com.solvd.WebTest"/>
         </classes>
     </test>
-    <test name="Firefox Test">
+    <!--<test name="Firefox Test">
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name="com.solvd.WebTest"/>
         </classes>
-    </test>
+    </test>-->
 </suite>
