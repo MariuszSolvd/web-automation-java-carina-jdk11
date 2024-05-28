@@ -2,6 +2,7 @@ package com.solvd.mapper;
 
 import com.solvd.model.Employee;
 import com.solvd.pages.pim.EmployeePage;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -37,7 +38,7 @@ public class EmployeeMapper {
                 .build();
     }
 
-    public static List<Employee> mapListToEmployees(List<WebElement> elements) {
+    public static List<Employee> mapListToEmployees(List<ExtendedWebElement> elements) {
         return elements.stream()
                 .map(EmployeeMapper::mapToEmployeeFromWebElement)
                 .toList();

@@ -16,6 +16,7 @@ public class AddJobPage extends AbstractPageWithLeftMenu {
 
     public AddJobPage(WebDriver webDriver) {
         super(webDriver);
+        setUiLoadedMarker(descriptionField);
     }
 
     public void inputJobTitle(String title) {

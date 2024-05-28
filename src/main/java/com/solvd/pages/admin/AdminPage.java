@@ -1,12 +1,10 @@
 package com.solvd.pages.admin;
 
-
-import com.solvd.pages.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class AdminPage extends AbstractPageWithLeftMenu {
+public class AdminPage extends AbstractAdminPage {
 
     @FindBy(xpath = "//span[contains(text(), 'Job')]/parent::li")
     private ExtendedWebElement jobButton;

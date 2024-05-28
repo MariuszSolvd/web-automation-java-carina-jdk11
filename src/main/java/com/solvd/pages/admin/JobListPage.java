@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class JobListPage extends AbstractPageWithLeftMenu {
+public class JobListPage extends AbstractAdminPage {
     @FindBy(xpath = "//i[contains(@class, 'bi-plus')]/parent::button")
     private ExtendedWebElement addJobButton;
     @FindBy(xpath = "//div[@class = 'oxd-table-card']/*")

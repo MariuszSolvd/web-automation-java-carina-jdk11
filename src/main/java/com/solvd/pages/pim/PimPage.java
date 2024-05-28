@@ -3,6 +3,8 @@ package com.solvd.pages.pim;
 import com.solvd.pages.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import lombok.Getter;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +21,7 @@ public class PimPage extends AbstractPageWithLeftMenu {
     private ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//button[contains(@class, 'label-danger')]")
     private ExtendedWebElement deleteConfirmationButton;
+    @Getter
     @FindBy(xpath = "//div[@class ='oxd-table-card']/*")
     private List<ExtendedWebElement> employeeList;
     @FindBy(xpath = "//div[@class = 'orangehrm-container']")
@@ -39,15 +42,11 @@ public class PimPage extends AbstractPageWithLeftMenu {
     }
 
     public void inputIdEmployee(String id) {
-        //TODO :Check out if clean work with sendKeys or has to use type method
         idEmployeeField.click();
-        idEmployeeField.sendKeys(Keys.CONTROL + "a");
-        idEmployeeField.sendKeys(Keys.BACK_SPACE);
+        //Is it only one way,  that works in Carina since method clear() is not implemented??
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
         idEmployeeField.type(id);
-    }
-
-    public List<ExtendedWebElement> getEmployeeList() {
-        return employeeList;
     }
 
     public void clickDeleteConfirmationButton() {
