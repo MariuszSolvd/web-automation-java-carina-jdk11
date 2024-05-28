@@ -14,6 +14,9 @@ import com.solvd.utilities.EmployeeWrapper;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -22,6 +25,12 @@ import static com.solvd.utilities.Urls.*;
 import static org.testng.Assert.*;
 
 public class WebTest extends AbstractTest {
+
+    @BeforeClass
+    @Parameters({"browser"})
+    public void setUp(String browser) {
+        R.CONFIG.put("capabilities.browserName", browser);
+    }
 
 
 
@@ -114,6 +123,13 @@ public class WebTest extends AbstractTest {
         List<Job> jobList = JobMapper.mapListToJob(jobElements);
 
         assertTrue(jobList.contains(jobToAdd));
+    }
+
+    @AfterClass
+    public void tearDown() {
+        if (getDriver() != null) {
+            getDriver().quit();
+        }
     }
 
 }
