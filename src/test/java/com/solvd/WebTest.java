@@ -14,11 +14,7 @@ import com.solvd.utilities.EmployeeWrapper;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -102,7 +98,6 @@ public class WebTest extends AbstractTest {
         dashboardPage.clickMenuButtonByHref(ADMIN_BUTTON_URL);
 
         AdminPage adminPage = new AdminPage(getDriver());
-        SoftAssert softAssert = new SoftAssert();
         adminPage.assertPageOpened();
 
         JobListPage jobListPage = adminPage.getJobListPage();
