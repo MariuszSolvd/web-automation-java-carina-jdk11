@@ -2,7 +2,9 @@ package com.solvd.pages.pim;
 
 import com.solvd.model.Employee;
 import com.solvd.pages.AbstractPageWithLeftMenu;
+import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +24,7 @@ public class AddEmployeePage extends AbstractPageWithLeftMenu {
 
     public AddEmployeePage(WebDriver webDriver) {
         super(webDriver);
+        setUiLoadedMarker(idEmployeeField);
     }
 
     public void inputFirstName(String firstName) {
@@ -37,10 +40,10 @@ public class AddEmployeePage extends AbstractPageWithLeftMenu {
     }
 
     public void inputIdEmployee(String id) {
-        //TODO :Check out if clean work with sendKeys or has to use type method
         idEmployeeField.click();
-        idEmployeeField.sendKeys(Keys.CONTROL + "a");
-        idEmployeeField.sendKeys(Keys.BACK_SPACE);
+        //Is it only one way,  that works in Carina since method clear() is not implemented??
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
         idEmployeeField.type(id);
     }
 

@@ -20,7 +20,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
-        setPageURL(R.CONFIG.get("login.url"));
+        setUiLoadedMarker(usernameField);
     }
 
     public void inputUsername(String username) {

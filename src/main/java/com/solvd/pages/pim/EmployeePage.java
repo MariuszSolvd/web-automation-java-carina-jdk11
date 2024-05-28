@@ -21,6 +21,7 @@ public class EmployeePage extends AbstractPageWithLeftMenu {
 
     public EmployeePage(WebDriver webDriver) {
         super(webDriver);
+        setUiLoadedMarker(idEmployeeField);
     }
 
     public LeftMenu getLeftMenu() {

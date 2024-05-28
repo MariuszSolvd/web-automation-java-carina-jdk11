@@ -10,6 +10,7 @@ public class LoginService {
 
     public static DashboardPage successfulLogin(WebDriver webDriver) {
         LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.open();
         loginPage.logIn(R.TESTDATA.get("correct_user"), R.TESTDATA.get("correct_password"));
 
         return new DashboardPage(webDriver);

@@ -3,7 +3,7 @@ package com.solvd.utilities;
 import static com.zebrunner.carina.utils.R.CONFIG;
 
 public interface Urls {
-    String BASE_URL = CONFIG.get("base.url");
+    String BASE_URL = CONFIG.get("url");
     String LOGIN_PAGE_URL = BASE_URL + CONFIG.get("login.url");
     String DASHBOARD_PAGE_URL = BASE_URL + CONFIG.get("dashboard.url");
     String EMPLOYEE_VIEW_PAGE_URL = BASE_URL + CONFIG.get("viewEmployeeList.url");
