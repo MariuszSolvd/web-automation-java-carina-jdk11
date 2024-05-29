@@ -4,9 +4,14 @@ import com.solvd.mapper.EmployeeMapper;
 import com.solvd.mapper.JobMapper;
 import com.solvd.model.Employee;
 import com.solvd.model.Job;
-import com.solvd.pages.*;
-import com.solvd.pages.admin.*;
-import com.solvd.pages.pim.*;
+import com.solvd.pages.common.DashboardPageBase;
+import com.solvd.pages.common.LoginPageBase;
+import com.solvd.pages.common.admin.AddJobPageBase;
+import com.solvd.pages.common.admin.JobListPageBase;
+import com.solvd.pages.common.pim.AddEmployeePageBase;
+import com.solvd.pages.common.pim.EmployeePageBase;
+import com.solvd.pages.common.pim.PimPageBase;
+import com.solvd.pages.desktop.admin.*;
 import com.solvd.service.EmployeeService;
 import com.solvd.service.JobService;
 import com.solvd.service.LoginService;
@@ -37,10 +42,10 @@ public class WebTest extends AbstractTest {
     //Test case 1
     @Test(testName = "T1", threadPoolSize = 1, invocationCount = 1)
     public void shouldLogin() {
-        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
         loginPage.logIn(R.TESTDATA.get("correct_user"), R.TESTDATA.get("correct_password"));
-        DashboardPage dashboardPage = new DashboardPage(getDriver());
+        DashboardPageBase dashboardPage = initPage(getDriver(), DashboardPageBase.class);
 
         dashboardPage.assertPageOpened();
     }
@@ -48,7 +53,7 @@ public class WebTest extends AbstractTest {
     //Test case 2
     @Test(testName = "T2", threadPoolSize = 1, invocationCount = 1)
     public void shouldNotLogin() {
-        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
         loginPage.logIn(R.TESTDATA.get("incorrect_user"), R.TESTDATA.get("incorrect_password"));
 
@@ -58,18 +63,19 @@ public class WebTest extends AbstractTest {
     //Test case 3
     @Test(testName = "T3", threadPoolSize = 1, invocationCount = 1)
     public void shouldAddEmployee() {
-        DashboardPage dashboardPage = LoginService.successfulLogin(getDriver());
+        LoginService loginService = new LoginService();
+        DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
         dashboardPage.clickMenuButtonByHref(PIM_PAGE_URL);
 
-        PimPage pimPage = new PimPage(getDriver());
+        PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
         pimPage.assertPageOpened();
 
-        AddEmployeePage addEmployeePage = pimPage.clickAddEmployeeButton();
+        AddEmployeePageBase addEmployeePage = pimPage.clickAddEmployeeButton();
         addEmployeePage.assertPageOpened();
 
         Employee employeeToAdd = EmployeeService.getEmployee();
-        EmployeePage employeePage = addEmployeePage.addEmployee(employeeToAdd);
+        EmployeePageBase employeePage = addEmployeePage.addEmployee(employeeToAdd);
         employeePage.assertPageOpened();
         Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
 
@@ -79,11 +85,12 @@ public class WebTest extends AbstractTest {
     //Test case 4
     @Test(testName = "T4", threadPoolSize = 1, invocationCount = 1)
     public void shouldDeleteEmployee() {
-        DashboardPage dashboardPage = LoginService.successfulLogin(getDriver());
+        LoginService loginService = new LoginService();
+        DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
         dashboardPage.clickMenuButtonByHref(PIM_PAGE_URL);
 
-        PimPage pimPage = new PimPage(getDriver());
+        PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
         pimPage.assertPageOpened();
         List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
 
@@ -102,17 +109,18 @@ public class WebTest extends AbstractTest {
     //Test case 5
     @Test(testName = "T5", threadPoolSize = 1, invocationCount = 1)
     public void shouldAddJobTitle() {
-        DashboardPage dashboardPage = LoginService.successfulLogin(getDriver());
+        LoginService loginService = new LoginService();
+        DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
         dashboardPage.clickMenuButtonByHref(ADMIN_BUTTON_URL);
 
         AdminPage adminPage = new AdminPage(getDriver());
         adminPage.assertPageOpened();
 
-        JobListPage jobListPage = adminPage.getJobListPage();
+        JobListPageBase jobListPage = adminPage.getJobListPage();
         jobListPage.assertPageOpened();
 
-        AddJobPage addJobPage = jobListPage.clickAddJobButton();
+        AddJobPageBase addJobPage = jobListPage.clickAddJobButton();
         addJobPage.assertPageOpened();
 
         Job jobToAdd = JobService.getJob();

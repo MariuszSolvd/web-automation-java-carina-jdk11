@@ -1,4 +1,4 @@
-package com.solvd.pages;
+package com.solvd.pages.desktop;
 
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @Getter
-public class AbstractPageWithLeftMenu extends AbstractPage {
+public abstract class AbstractPageWithLeftMenu extends AbstractPage {
     @FindBy(xpath = "//nav[@class= 'oxd-navbar-nav']")
     protected LeftMenu leftMenu;
 

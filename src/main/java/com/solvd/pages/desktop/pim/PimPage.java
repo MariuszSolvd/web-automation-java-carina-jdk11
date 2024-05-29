@@ -1,17 +1,16 @@
-package com.solvd.pages.pim;
+package com.solvd.pages.desktop.pim;
 
-import com.solvd.pages.AbstractPageWithLeftMenu;
-import com.zebrunner.carina.utils.R;
+import com.solvd.pages.common.pim.AddEmployeePageBase;
+import com.solvd.pages.common.pim.PimPageBase;
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
 
-public class PimPage extends AbstractPageWithLeftMenu {
+@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = PimPageBase.class)
+public class PimPage extends PimPageBase {
 
     @FindBy(xpath = "//button[contains(., 'Add')]")
     private ExtendedWebElement addEmployeeButton;
@@ -21,9 +20,6 @@ public class PimPage extends AbstractPageWithLeftMenu {
     private ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//button[contains(@class, 'label-danger')]")
     private ExtendedWebElement deleteConfirmationButton;
-    @Getter
-    @FindBy(xpath = "//div[@class ='oxd-table-card']/*")
-    private List<ExtendedWebElement> employeeList;
     @FindBy(xpath = "//div[@class = 'orangehrm-container']")
     private ExtendedWebElement employeeContainer;
 
@@ -32,15 +28,18 @@ public class PimPage extends AbstractPageWithLeftMenu {
         setUiLoadedMarker(employeeContainer);
     }
 
-    public AddEmployeePage clickAddEmployeeButton() {
+    @Override
+    public AddEmployeePageBase clickAddEmployeeButton() {
         addEmployeeButton.click();
-        return new AddEmployeePage(getDriver());
+        return initPage(getDriver(), AddEmployeePageBase.class);
     }
 
+    @Override
     public void clickSearchEmployeeButton() {
         searchEmployeeButton.click();
     }
 
+    @Override
     public void inputIdEmployee(String id) {
         idEmployeeField.click();
         //Is it only one way,  that works in Carina since method clear() is not implemented??
@@ -49,6 +48,7 @@ public class PimPage extends AbstractPageWithLeftMenu {
         idEmployeeField.type(id);
     }
 
+    @Override
     public void clickDeleteConfirmationButton() {
         deleteConfirmationButton.click();
     }

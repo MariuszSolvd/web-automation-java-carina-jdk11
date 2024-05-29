@@ -1,7 +1,8 @@
 package com.solvd.mapper;
 
 import com.solvd.model.Employee;
-import com.solvd.pages.pim.EmployeePage;
+import com.solvd.pages.common.pim.EmployeePageBase;
+import com.solvd.pages.desktop.pim.EmployeePage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class EmployeeMapper {
 
-    public static Employee mapToEmployeeFromEmployeePage(EmployeePage employeePage) {
+    public static Employee mapToEmployeeFromEmployeePage(EmployeePageBase employeePage) {
         return Employee.builder()
                 .firstName(employeePage.getFirstNameText())
                 .middleName(employeePage.getMiddleNameText())

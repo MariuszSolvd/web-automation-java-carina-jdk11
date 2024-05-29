@@ -1,12 +1,12 @@
-package com.solvd.pages.pim;
+package com.solvd.pages.desktop.pim;
 
-import com.solvd.pages.AbstractPageWithLeftMenu;
-import com.solvd.pages.LeftMenu;
+import com.solvd.pages.common.pim.EmployeePageBase;
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-
-public class EmployeePage extends AbstractPageWithLeftMenu {
+@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = EmployeePageBase.class)
+public class EmployeePage extends EmployeePageBase {
 
     @FindBy(name = "firstName")
     private ExtendedWebElement firstNameField;
@@ -22,10 +22,6 @@ public class EmployeePage extends AbstractPageWithLeftMenu {
     public EmployeePage(WebDriver webDriver) {
         super(webDriver);
         setUiLoadedMarker(idEmployeeField);
-    }
-
-    public LeftMenu getLeftMenu() {
-        return leftMenu;
     }
 
     public String getFirstNameText() {
@@ -45,7 +41,6 @@ public class EmployeePage extends AbstractPageWithLeftMenu {
     }
 
     private String getValueWrapper(ExtendedWebElement element) {
-        //TODO: Check if it waits for value attribute during test
         return element.getAttribute("value");
     }
 }

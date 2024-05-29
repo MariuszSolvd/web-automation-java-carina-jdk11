@@ -1,15 +1,16 @@
-package com.solvd.pages.pim;
+package com.solvd.pages.desktop.pim;
 
 import com.solvd.model.Employee;
-import com.solvd.pages.AbstractPageWithLeftMenu;
-import com.zebrunner.carina.utils.R;
+import com.solvd.pages.common.pim.AddEmployeePageBase;
+import com.solvd.pages.common.pim.EmployeePageBase;
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class AddEmployeePage extends AbstractPageWithLeftMenu {
+@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = AddEmployeePageBase.class)
+public class AddEmployeePage extends AddEmployeePageBase {
 
     @FindBy(name = "firstName")
     private ExtendedWebElement fistNameField;
@@ -27,18 +28,22 @@ public class AddEmployeePage extends AbstractPageWithLeftMenu {
         setUiLoadedMarker(idEmployeeField);
     }
 
+    @Override
     public void inputFirstName(String firstName) {
         fistNameField.type(firstName);
     }
 
+    @Override
     public void inputMiddleName(String middleName) {
         middleNameField.type(middleName);
     }
 
+    @Override
     public void inputLastName(String lastName) {
         lastNameField.type(lastName);
     }
 
+    @Override
     public void inputIdEmployee(String id) {
         idEmployeeField.click();
         //Is it only one way,  that works in Carina since method clear() is not implemented??
@@ -47,18 +52,20 @@ public class AddEmployeePage extends AbstractPageWithLeftMenu {
         idEmployeeField.type(id);
     }
 
+    @Override
     public void clickSaveButton() {
         saveButton.click();
     }
 
-    public EmployeePage addEmployee(Employee employee) {
+    @Override
+    public EmployeePageBase addEmployee(Employee employee) {
         inputFirstName(employee.getFirstName());
         inputMiddleName(employee.getMiddleName());
         inputLastName(employee.getLastName());
         inputIdEmployee(employee.getIdEmployee());
         clickSaveButton();
         //TODO: Check during test if wait for it is enough in Carina
-        return new EmployeePage(getDriver());
+        return initPage(getDriver(), EmployeePageBase.class);
     }
 
 }
