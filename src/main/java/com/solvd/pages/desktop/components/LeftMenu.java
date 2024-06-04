@@ -1,13 +1,15 @@
-package com.solvd.pages.desktop;
+package com.solvd.pages.desktop.components;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import lombok.Getter;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+@Getter
 public class LeftMenu extends AbstractUIObject {
 
     @FindBy(xpath = ".//li[@class='oxd-main-menu-item-wrapper']//a")
@@ -22,10 +24,6 @@ public class LeftMenu extends AbstractUIObject {
                 .filter(button -> button.getAttribute("href").equals(href))
                 .findFirst()
                 .get();
-    }
-
-    public List<ExtendedWebElement> getMenuButtons() {
-        return menuButtons;
     }
 
 }

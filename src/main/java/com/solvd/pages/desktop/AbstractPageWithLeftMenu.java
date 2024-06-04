@@ -1,5 +1,6 @@
 package com.solvd.pages.desktop;
 
+import com.solvd.pages.desktop.components.LeftMenu;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
