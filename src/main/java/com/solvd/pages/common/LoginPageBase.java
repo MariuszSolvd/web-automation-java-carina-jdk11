@@ -38,9 +38,5 @@ public abstract class LoginPageBase extends AbstractPage {
         return alertField.isDisplayed();
     }
 
-    public void logIn(String username, String password) {
-        inputUsername(username);
-        inputPassword(password);
-        clickLoginButton();
-    }
+    public abstract void logIn(String username, String password);
 }
