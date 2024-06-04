@@ -31,11 +31,11 @@ import static org.testng.Assert.*;
 
 public class WebTest extends AbstractTest {
 
-    @BeforeClass
-    @Parameters({"browser"})
-    public void setUp(String browser) {
-        R.CONFIG.put("capabilities.browserName", browser);
-    }
+//    @BeforeClass
+//    @Parameters({"browser"})
+//    public void setUp(String browser) {
+//        R.CONFIG.put("capabilities.browserName", browser);
+//    }
 
 
 
@@ -133,11 +133,11 @@ public class WebTest extends AbstractTest {
         assertTrue(jobList.contains(jobToAdd));
     }
 
-    @AfterClass
-    public void tearDown() {
-        if (getDriver() != null) {
-            getDriver().quit();
-        }
-    }
+//    @AfterClass
+//    public void tearDown() {
+//        if (getDriver() != null) {
+//            getDriver().quit();
+//        }
+//    }
 
 }
