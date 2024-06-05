@@ -1,7 +1,5 @@
 package com.solvd.pages.common.admin;
 
-import com.solvd.pages.desktop.admin.AbstractAdminPage;
-import com.solvd.pages.desktop.admin.AddJobPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;

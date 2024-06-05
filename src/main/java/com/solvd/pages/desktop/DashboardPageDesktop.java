@@ -11,4 +11,9 @@ public class DashboardPageDesktop extends DashboardPageBase {
         super(webDriver);
     }
 
+    @Override
+    public void clickMenuButtonByHref(String href) {
+        leftMenu.getButtonByHref(href).click();
+    }
+
 }

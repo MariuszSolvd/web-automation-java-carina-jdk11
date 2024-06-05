@@ -1,6 +1,6 @@
-package com.solvd.pages.desktop.admin;
+package com.solvd.pages.common.admin;
 
-import com.solvd.pages.desktop.AbstractPageWithLeftMenu;
+import com.solvd.pages.common.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

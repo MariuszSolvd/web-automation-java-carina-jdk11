@@ -2,7 +2,6 @@ package com.solvd.mapper;
 
 import com.solvd.model.Employee;
 import com.solvd.pages.common.pim.EmployeePageBase;
-import com.solvd.pages.desktop.pim.EmployeePage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

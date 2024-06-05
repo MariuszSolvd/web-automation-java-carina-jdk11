@@ -19,6 +19,11 @@ public class JobListPage extends JobListPageBase {
         super(webDriver);
     }
 
+    @Override
+    public void clickMenuButtonByHref(String href) {
+        leftMenu.getButtonByHref(href).click();
+    }
+
     public AddJobPageBase clickAddJobButton() {
         addJobButton.click();
         return initPage(getDriver(), AddJobPageBase.class);

@@ -1,4 +1,4 @@
-package com.solvd.pages.desktop.components;
+package com.solvd.pages.common.components;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -20,6 +20,7 @@ public class LeftMenu extends AbstractUIObject {
     }
 
     public ExtendedWebElement getButtonByHref(String href) {
+        menuButtons = getMenuButtons();
         return menuButtons.stream()
                 .filter(button -> button.getAttribute("href").equals(href))
                 .findFirst()

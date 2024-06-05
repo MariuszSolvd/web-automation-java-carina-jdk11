@@ -20,6 +20,11 @@ public class AdminPage extends AdminPageBase {
     }
 
     @Override
+    public void clickMenuButtonByHref(String href) {
+        leftMenu.getButtonByHref(href).click();
+    }
+
+    @Override
     public void clickJobButton() {
         jobButton.click();
     }

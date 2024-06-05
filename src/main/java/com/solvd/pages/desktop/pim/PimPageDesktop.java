@@ -10,28 +10,15 @@ import org.openqa.selenium.support.FindBy;
 
 
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = PimPageBase.class)
-public class PimPage extends PimPageBase {
+public class PimPageDesktop extends PimPageBase {
 
-    @FindBy(xpath = "//button[contains(., 'Add')]")
-    private ExtendedWebElement addEmployeeButton;
-    @FindBy(xpath = "//button[contains(., 'Search')]")
-    private ExtendedWebElement searchEmployeeButton;
-    @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
-    private ExtendedWebElement idEmployeeField;
-    @FindBy(xpath = "//button[contains(@class, 'label-danger')]")
-    private ExtendedWebElement deleteConfirmationButton;
-    @FindBy(xpath = "//div[@class = 'orangehrm-container']")
-    private ExtendedWebElement employeeContainer;
-
-    public PimPage(WebDriver webDriver) {
+    public PimPageDesktop(WebDriver webDriver) {
         super(webDriver);
-        setUiLoadedMarker(employeeContainer);
     }
 
     @Override
-    public AddEmployeePageBase clickAddEmployeeButton() {
-        addEmployeeButton.click();
-        return initPage(getDriver(), AddEmployeePageBase.class);
+    public void clickMenuButtonByHref(String href) {
+        leftMenu.getButtonByHref(href).click();
     }
 
     @Override

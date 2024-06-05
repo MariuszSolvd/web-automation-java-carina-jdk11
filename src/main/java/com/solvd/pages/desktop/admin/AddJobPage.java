@@ -24,6 +24,11 @@ public class AddJobPage extends AddJobPageBase {
     }
 
     @Override
+    public void clickMenuButtonByHref(String href) {
+        leftMenu.getButtonByHref(href).click();
+    }
+
+    @Override
     public void inputJobTitle(String title) {
         jobTitleField.type(title);
     }

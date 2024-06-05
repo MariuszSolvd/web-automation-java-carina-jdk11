@@ -8,7 +8,6 @@ public interface Urls {
     String DASHBOARD_PAGE_URL = BASE_URL + CONFIG.get("dashboard.url");
     String EMPLOYEE_VIEW_PAGE_URL = BASE_URL + CONFIG.get("viewEmployeeList.url");
     String EMPLOYEE_ADD_PAGE_URL = BASE_URL + CONFIG.get("addEmployee.url");
-    String ADMIN_BUTTON_URL = BASE_URL + CONFIG.get("admin.href");
     String PIM_PAGE_URL = BASE_URL + CONFIG.get("pim.url");
     String LEAVE_PAGE_URL = BASE_URL + CONFIG.get("leave.url");
     String TIME_PAGE_URL = BASE_URL + CONFIG.get("time.url");
@@ -23,4 +22,10 @@ public interface Urls {
     String ADMIN_PAGE_URL = BASE_URL + CONFIG.get("admin.url");
     String JOB_LIST_PAGE_URL = BASE_URL + CONFIG.get("jobList.url");
     String JOB_ADD_PAGE_URL = BASE_URL + CONFIG.get("jobAdd.url");
+
+    //Href for Buttons
+    String BASE_BUTTON_HREF = "/web/index.php";
+    String PIM_BUTTON_HREF = BASE_BUTTON_HREF + CONFIG.get("pim.url");
+
+
 }

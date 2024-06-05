@@ -66,7 +66,7 @@ public class WebTest extends AbstractTest {
         LoginService loginService = new LoginService();
         DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(PIM_PAGE_URL);
+        dashboardPage.clickMenuButtonByHref(PIM_BUTTON_HREF);
 
         PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
         pimPage.assertPageOpened();
@@ -112,7 +112,7 @@ public class WebTest extends AbstractTest {
         LoginService loginService = new LoginService();
         DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(ADMIN_BUTTON_URL);
+        dashboardPage.clickMenuButtonByHref(ADMIN_PAGE_URL);
 
         AdminPage adminPage = new AdminPage(getDriver());
         adminPage.assertPageOpened();

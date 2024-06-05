@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = AddEmployeePageBase.class)
-public class AddEmployeePage extends AddEmployeePageBase {
+public class AddEmployeePageDesktop extends AddEmployeePageBase {
 
     @FindBy(name = "firstName")
     private ExtendedWebElement fistNameField;
@@ -23,33 +23,13 @@ public class AddEmployeePage extends AddEmployeePageBase {
     @FindBy(xpath = "//button[@type = 'submit']")
     private ExtendedWebElement saveButton;
 
-    public AddEmployeePage(WebDriver webDriver) {
+    public AddEmployeePageDesktop(WebDriver webDriver) {
         super(webDriver);
-        setUiLoadedMarker(idEmployeeField);
     }
 
     @Override
-    public void inputFirstName(String firstName) {
-        fistNameField.type(firstName);
-    }
-
-    @Override
-    public void inputMiddleName(String middleName) {
-        middleNameField.type(middleName);
-    }
-
-    @Override
-    public void inputLastName(String lastName) {
-        lastNameField.type(lastName);
-    }
-
-    @Override
-    public void inputIdEmployee(String id) {
-        idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
-        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
-        idEmployeeField.type(id);
+    public void clickMenuButtonByHref(String href) {
+        leftMenu.getButtonByHref(href).click();
     }
 
     @Override

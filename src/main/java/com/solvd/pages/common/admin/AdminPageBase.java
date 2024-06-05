@@ -1,6 +1,5 @@
 package com.solvd.pages.common.admin;
 
-import com.solvd.pages.desktop.admin.AbstractAdminPage;
 import org.openqa.selenium.WebDriver;
 
 public abstract class AdminPageBase extends AbstractAdminPage {

@@ -10,4 +10,11 @@ public class DashboardPageMobile extends DashboardPageBase {
     public DashboardPageMobile(WebDriver driver) {
         super(driver);
     }
+
+    @Override
+    public void clickMenuButtonByHref(String href) {
+        getMenuByClick();
+        leftMenu.getButtonByHref(href).click();
+    }
+
 }
