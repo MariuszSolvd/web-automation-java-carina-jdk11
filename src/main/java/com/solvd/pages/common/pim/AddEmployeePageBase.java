@@ -15,7 +15,7 @@ public abstract class AddEmployeePageBase extends AbstractPageWithLeftMenu {
     @FindBy(name = "lastName")
     private ExtendedWebElement lastNameField;
     @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
-    private ExtendedWebElement idEmployeeField;
+    protected ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//button[@type = 'submit']")
     protected ExtendedWebElement saveButton;
 
@@ -36,13 +36,7 @@ public abstract class AddEmployeePageBase extends AbstractPageWithLeftMenu {
         lastNameField.type(lastName);
     }
 
-    protected void inputIdEmployee(String id) {
-        idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
-        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
-        idEmployeeField.type(id);
-    }
+    protected abstract void inputIdEmployee(String id);
 
     public abstract void clickSaveButton();
 

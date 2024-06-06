@@ -2,9 +2,11 @@ package com.solvd.pages.common.pim;
 
 import com.solvd.pages.common.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+@Getter
 public abstract class EmployeePageBase extends AbstractPageWithLeftMenu {
     @FindBy(name = "firstName")
     private ExtendedWebElement firstNameField;
@@ -19,7 +21,7 @@ public abstract class EmployeePageBase extends AbstractPageWithLeftMenu {
 
     public EmployeePageBase(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(idEmployeeField);
+        setUiLoadedMarker(firstNameField);
     }
 
     public String getFirstNameText() {

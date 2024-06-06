@@ -33,6 +33,15 @@ public class AddEmployeePageDesktop extends AddEmployeePageBase {
     }
 
     @Override
+    protected void inputIdEmployee(String id) {
+        idEmployeeField.click();
+        //Is it only one way,  that works in Carina since method clear() is not implemented??
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
+        idEmployeeField.type(id);
+    }
+
+    @Override
     public void clickSaveButton() {
         saveButton.click();
     }
