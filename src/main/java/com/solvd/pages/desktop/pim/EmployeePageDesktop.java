@@ -4,7 +4,6 @@ import com.solvd.pages.common.pim.EmployeePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = EmployeePageBase.class)
 public class EmployeePageDesktop extends EmployeePageBase {
 
@@ -13,8 +12,31 @@ public class EmployeePageDesktop extends EmployeePageBase {
     }
 
     @Override
+    public String getFirstNameText() {
+        return getValueWrapper(firstNameField);
+    }
+
+    @Override
+    public String getMiddleNameText() {
+        return getValueWrapper(middleNameField);
+    }
+
+    @Override
+    public String getLastNameText() {
+        return getValueWrapper(lastNameField);
+    }
+
+    @Override
+    public String getIdEmployeeText() {
+        return getValueWrapper(idEmployeeField);
+    }
+
+    @Override
     public void clickMenuButtonByHref(String href) {
         leftMenu.getButtonByHref(href).click();
     }
 
+    private String getValueWrapper(ExtendedWebElement element) {
+        return element.getAttribute("value");
+    }
 }

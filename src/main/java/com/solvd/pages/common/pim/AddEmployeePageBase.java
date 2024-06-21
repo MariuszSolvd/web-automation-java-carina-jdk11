@@ -3,7 +3,6 @@ package com.solvd.pages.common.pim;
 import com.solvd.model.Employee;
 import com.solvd.pages.common.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,10 +17,12 @@ public abstract class AddEmployeePageBase extends AbstractPageWithLeftMenu {
     protected ExtendedWebElement idEmployeeField;
     @FindBy(xpath = "//button[@type = 'submit']")
     protected ExtendedWebElement saveButton;
+    @FindBy(xpath = "//div[@class = 'employee-image-wrapper']")
+    private ExtendedWebElement employeeImage;
 
     public AddEmployeePageBase(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(idEmployeeField);
+        setUiLoadedMarker(employeeImage);
     }
 
     protected void inputFirstName(String firstName) {
