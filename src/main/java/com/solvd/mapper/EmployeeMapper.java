@@ -19,7 +19,7 @@ public class EmployeeMapper {
                 .build();
     }
 
-    public static Employee mapToEmployeeFromWebElement(WebElement webElement) {
+    public static Employee mapToEmployeeFromWebElementDesktop(WebElement webElement) {
         List<WebElement> cells = webElement.findElements(By.xpath(".//*[@role='cell']"));
         String[] names = cells.get(2).getText().split(" ");
 
@@ -38,9 +38,34 @@ public class EmployeeMapper {
                 .build();
     }
 
-    public static List<Employee> mapListToEmployees(List<ExtendedWebElement> elements) {
+    public static Employee mapToEmployeeFromWebElementMobile(WebElement webElement) {
+        List<WebElement> cells = webElement.findElements(By.xpath(".//*[@role='cell']"));
+        String[] findId = cells.getFirst().getText().split("[\n\r]");
+        String[] names = cells.get(2).getText().split("[\n\r]");
+        String[] name = names[1].split(" ");
+        String middleName = null;
+        if (name.length > 1) {
+            middleName = name[1];
+        }
+        String[] lastName = cells.get(3).getText().split("[\n\r]");
+
+        return Employee.builder()
+                .firstName(name[0])
+                .middleName(middleName)
+                .lastName(lastName[1])
+                .idEmployee(findId[1])
+                .build();
+    }
+
+    public static List<Employee> mapListToEmployeesDesktop(List<ExtendedWebElement> elements) {
         return elements.stream()
-                .map(EmployeeMapper::mapToEmployeeFromWebElement)
+                .map(EmployeeMapper::mapToEmployeeFromWebElementDesktop)
+                .toList();
+    }
+
+    public static List<Employee> mapListToEmployeesMobile(List<ExtendedWebElement> elements) {
+        return elements.stream()
+                .map(EmployeeMapper::mapToEmployeeFromWebElementMobile)
                 .toList();
     }
 }

@@ -1,9 +1,11 @@
 package com.solvd.pages.common.pim;
 
+import com.solvd.model.Employee;
 import com.solvd.pages.common.AbstractPageWithLeftMenu;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
 public abstract class PimPageBase extends AbstractPageWithLeftMenu {
 
     @Getter
-    @FindBy(xpath = "//div[@class ='oxd-table-card']/*")
+    @FindBy(xpath = "//div[@role = 'rowgroup']/div[contains(@class, 'oxd-table-card')]/*")
     protected List<ExtendedWebElement> employeeList;
     @FindBy(xpath = "//button[contains(., 'Add')]")
     private ExtendedWebElement addEmployeeButton;
@@ -38,5 +40,11 @@ public abstract class PimPageBase extends AbstractPageWithLeftMenu {
 
     public abstract void inputIdEmployee(String id);
 
-    public abstract void clickDeleteConfirmationButton();
+    public void clickDeleteConfirmationButton() {
+        deleteConfirmationButton.click();
+    }
+
+    public abstract Employee mapToEmployee(WebElement webElement);
+
+    public abstract List<Employee> mapToEmployeeList(List<ExtendedWebElement> employees);
 }

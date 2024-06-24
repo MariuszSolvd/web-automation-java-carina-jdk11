@@ -78,7 +78,6 @@ public class WebTest extends AbstractTest {
         EmployeePageBase employeePage = addEmployeePage.addEmployee(employeeToAdd);
         employeePage.assertPageOpened();
         Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
-
         assertEquals(employeeReceived, employeeToAdd, "Employee does not contain same data");
     }
 
@@ -88,20 +87,18 @@ public class WebTest extends AbstractTest {
         LoginService loginService = new LoginService();
         DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(PIM_PAGE_URL);
+        dashboardPage.clickMenuButtonByHref(PIM_BUTTON_HREF);
 
         PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
         pimPage.assertPageOpened();
         List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
-
-        Employee employeeToDelete = EmployeeMapper.mapToEmployeeFromWebElement(employeeElementList.getFirst());
-
+        Employee employeeToDelete = pimPage.mapToEmployee(employeeElementList.getFirst());
         EmployeeWrapper employeeWrapper = new EmployeeWrapper(employeeElementList.getFirst());
         employeeWrapper.clickDeleteButton();
         pimPage.clickDeleteConfirmationButton();
         pimPage.inputIdEmployee(employeeToDelete.getIdEmployee());
         pimPage.clickSearchEmployeeButton();
-        List<Employee> employeeList = EmployeeMapper.mapListToEmployees(employeeElementList);
+        List<Employee> employeeList = pimPage.mapToEmployeeList(employeeElementList);
 
         assertFalse(employeeList.contains(employeeToDelete), "Employee wasn't deleted");
     }
