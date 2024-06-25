@@ -9,10 +9,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public abstract class LoginPageBase extends AbstractPage {
     @FindBy(name = "username")
     private ExtendedWebElement usernameField;
+
     @FindBy(name = "password")
     private ExtendedWebElement passwordField;
+
     @FindBy(xpath = "//button")
     private ExtendedWebElement loginButton;
+
     @FindBy(xpath = "//div[@role = 'alert']")
     private ExtendedWebElement alertField;
 

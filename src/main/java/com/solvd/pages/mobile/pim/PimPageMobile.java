@@ -14,10 +14,13 @@ import java.util.List;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = PimPageBase.class)
 public class PimPageMobile extends PimPageBase {
+
     @FindBy(xpath = "//div[@class = 'oxd-table-filter-header-options']//button")
     private ExtendedWebElement infoButton;
+
     @FindBy(xpath = "//div[@class = 'oxd-table-filter-header']//button")
     private ExtendedWebElement openSearchButton;
+
 
     public PimPageMobile(WebDriver driver) {
         super(driver);
@@ -33,7 +36,6 @@ public class PimPageMobile extends PimPageBase {
     public void inputIdEmployee(String id) {
         clickOpenSearchButton();
         idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
         idEmployeeField.type(id);

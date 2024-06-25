@@ -8,8 +8,10 @@ import org.openqa.selenium.support.FindBy;
 public abstract class AddJobPageBase extends AbstractAdminPage {
     @FindBy(xpath = "//div[@class = 'oxd-form-row']//input[contains(@class, 'oxd-input')]")
     private ExtendedWebElement jobTitleField;
+
     @FindBy(xpath = "//textarea[@placeholder = 'Type description here']")
     private ExtendedWebElement descriptionField;
+
     @FindBy(xpath = "//button[@type = 'submit']")
     private ExtendedWebElement saveButton;
 

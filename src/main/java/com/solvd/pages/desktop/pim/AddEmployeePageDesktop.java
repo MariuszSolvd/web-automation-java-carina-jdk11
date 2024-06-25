@@ -14,12 +14,16 @@ public class AddEmployeePageDesktop extends AddEmployeePageBase {
 
     @FindBy(name = "firstName")
     private ExtendedWebElement fistNameField;
+
     @FindBy(name = "middleName")
     private ExtendedWebElement middleNameField;
+
     @FindBy(name = "lastName")
     private ExtendedWebElement lastNameField;
+
     @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
     private ExtendedWebElement idEmployeeField;
+
     @FindBy(xpath = "//button[@type = 'submit']")
     private ExtendedWebElement saveButton;
 
@@ -35,7 +39,6 @@ public class AddEmployeePageDesktop extends AddEmployeePageBase {
     @Override
     protected void inputIdEmployee(String id) {
         idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
         idEmployeeField.type(id);
@@ -53,8 +56,6 @@ public class AddEmployeePageDesktop extends AddEmployeePageBase {
         inputLastName(employee.getLastName());
         inputIdEmployee(employee.getIdEmployee());
         clickSaveButton();
-        //TODO: Check during test if wait for it is enough in Carina
         return initPage(getDriver(), EmployeePageBase.class);
     }
-
 }

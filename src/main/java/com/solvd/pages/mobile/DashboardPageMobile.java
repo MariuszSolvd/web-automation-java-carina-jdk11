@@ -16,5 +16,4 @@ public class DashboardPageMobile extends DashboardPageBase {
         getMenuByClick();
         leftMenu.getButtonByHref(href).click();
     }
-
 }

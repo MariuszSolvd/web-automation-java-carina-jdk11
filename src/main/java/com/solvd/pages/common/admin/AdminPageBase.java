@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public abstract class AdminPageBase extends AbstractAdminPage {
     @FindBy(xpath = "//span[contains(text(), 'Job')]/parent::li")
     private ExtendedWebElement jobButton;
+
     @FindBy(xpath = "//a[contains(text(), 'Job Titles')]/parent::li")
     private ExtendedWebElement jobTitleButton;
 

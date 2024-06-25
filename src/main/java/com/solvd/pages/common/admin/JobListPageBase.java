@@ -13,6 +13,7 @@ public abstract class JobListPageBase extends AbstractAdminPage {
     @Getter
     @FindBy(xpath = "//i[contains(@class, 'bi-plus')]/parent::button")
     private ExtendedWebElement addJobButton;
+
     @FindBy(xpath = "//div[@role ='table']")
     private ExtendedWebElement jobContainer;
 

@@ -19,6 +19,4 @@ public class LoginPageMobile extends LoginPageBase implements IAndroidUtils {
         pressBack();
         clickLoginButton();
     }
-
-
 }

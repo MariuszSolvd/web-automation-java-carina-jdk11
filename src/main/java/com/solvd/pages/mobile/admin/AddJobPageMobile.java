@@ -11,5 +11,4 @@ public class AddJobPageMobile extends AddJobPageBase {
     public AddJobPageMobile(WebDriver webDriver) {
         super(webDriver);
     }
-
 }

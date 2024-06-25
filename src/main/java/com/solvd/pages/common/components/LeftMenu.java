@@ -26,5 +26,4 @@ public class LeftMenu extends AbstractUIObject {
                 .findFirst()
                 .get();
     }
-
 }

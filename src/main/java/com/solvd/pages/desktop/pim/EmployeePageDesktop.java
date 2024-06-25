@@ -4,6 +4,7 @@ import com.solvd.pages.common.pim.EmployeePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
+
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = EmployeePageBase.class)
 public class EmployeePageDesktop extends EmployeePageBase {
 

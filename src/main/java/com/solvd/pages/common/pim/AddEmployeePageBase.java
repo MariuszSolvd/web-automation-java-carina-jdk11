@@ -9,14 +9,19 @@ import org.openqa.selenium.support.FindBy;
 public abstract class AddEmployeePageBase extends AbstractPageWithLeftMenu {
     @FindBy(name = "firstName")
     private ExtendedWebElement fistNameField;
+
     @FindBy(name = "middleName")
     private ExtendedWebElement middleNameField;
+
     @FindBy(name = "lastName")
     private ExtendedWebElement lastNameField;
+
     @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
     protected ExtendedWebElement idEmployeeField;
+
     @FindBy(xpath = "//button[@type = 'submit']")
     protected ExtendedWebElement saveButton;
+
     @FindBy(xpath = "//div[@class = 'employee-image-wrapper']")
     private ExtendedWebElement employeeImage;
 

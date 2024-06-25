@@ -15,14 +15,19 @@ public abstract class PimPageBase extends AbstractPageWithLeftMenu {
     @Getter
     @FindBy(xpath = "//div[@role = 'rowgroup']/div[contains(@class, 'oxd-table-card')]/*")
     protected List<ExtendedWebElement> employeeList;
+
     @FindBy(xpath = "//button[contains(., 'Add')]")
     private ExtendedWebElement addEmployeeButton;
+
     @FindBy(xpath = "//button[contains(., 'Search')]")
     protected ExtendedWebElement searchEmployeeButton;
+
     @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
     protected ExtendedWebElement idEmployeeField;
+
     @FindBy(xpath = "//button[contains(@class, 'label-danger')]")
     protected ExtendedWebElement deleteConfirmationButton;
+
     @FindBy(xpath = "//div[@class = 'orangehrm-container']")
     protected ExtendedWebElement employeeContainer;
 

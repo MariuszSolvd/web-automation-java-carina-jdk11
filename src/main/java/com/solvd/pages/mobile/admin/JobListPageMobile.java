@@ -12,8 +12,10 @@ import java.util.List;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = JobListPageBase.class)
 public class JobListPageMobile extends JobListPageBase {
+
     @FindBy(xpath = "//i[contains(@class, 'bi-plus')]/parent::button")
     private ExtendedWebElement addJobButton;
+
     @FindBy(xpath = "//div[@role ='rowgroup']/*")
     private List<ExtendedWebElement> jobList;
 
@@ -35,6 +37,4 @@ public class JobListPageMobile extends JobListPageBase {
     public void clickMenuButtonByHref(String href) {
         leftMenu.getButtonByHref(href).click();
     }
-
-
 }

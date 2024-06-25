@@ -15,5 +15,4 @@ public class DashboardPageDesktop extends DashboardPageBase {
     public void clickMenuButtonByHref(String href) {
         leftMenu.getButtonByHref(href).click();
     }
-
 }

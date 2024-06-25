@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = JobListPageBase.class)
 public class JobListPageDesktop extends JobListPageBase {
+
     @FindBy(xpath = "//div[@class = 'oxd-table-card']/*")
     private List<ExtendedWebElement> jobList;
 
@@ -32,5 +33,4 @@ public class JobListPageDesktop extends JobListPageBase {
     public void clickMenuButtonByHref(String href) {
         leftMenu.getButtonByHref(href).click();
     }
-
 }

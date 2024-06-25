@@ -12,6 +12,4 @@ public abstract class DashboardPageBase extends AbstractPageWithLeftMenu {
         super(driver);
         setUiLoadedMarker(attendanceChart);
     }
-
-
 }

@@ -32,7 +32,6 @@ public class PimPageDesktop extends PimPageBase {
     @Override
     public void inputIdEmployee(String id) {
         idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
         idEmployeeField.type(id);
@@ -47,5 +46,4 @@ public class PimPageDesktop extends PimPageBase {
     public List<Employee> mapToEmployeeList(List<ExtendedWebElement> employees) {
         return EmployeeMapper.mapListToEmployeesDesktop(employeeList);
     }
-
 }

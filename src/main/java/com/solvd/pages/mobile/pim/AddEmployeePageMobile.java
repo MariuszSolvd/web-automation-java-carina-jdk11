@@ -19,7 +19,6 @@ public class AddEmployeePageMobile extends AddEmployeePageBase implements IAndro
         waitUntil(ExpectedConditions.elementToBeClickable(idEmployeeField), 20);
         idEmployeeField.click();
         idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
         for (int i = 0; i < 4; i++) {
             pressKeyboardKey(AndroidKey.DEL);
         }

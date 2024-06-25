@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public abstract class AbstractPageWithLeftMenu extends AbstractPage {
     @FindBy(xpath = "//nav[@class= 'oxd-navbar-nav']")
     protected LeftMenu leftMenu;
+
     @FindBy(xpath = "//i[contains(@class, 'hamburger')]")
     protected ExtendedWebElement menuButton;
 
