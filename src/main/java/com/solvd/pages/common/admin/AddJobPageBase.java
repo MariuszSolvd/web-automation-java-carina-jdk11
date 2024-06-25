@@ -1,18 +1,43 @@
 package com.solvd.pages.common.admin;
 
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
+
 
 public abstract class AddJobPageBase extends AbstractAdminPage {
+    @FindBy(xpath = "//div[@class = 'oxd-form-row']//input[contains(@class, 'oxd-input')]")
+    private ExtendedWebElement jobTitleField;
+    @FindBy(xpath = "//textarea[@placeholder = 'Type description here']")
+    private ExtendedWebElement descriptionField;
+    @FindBy(xpath = "//button[@type = 'submit']")
+    private ExtendedWebElement saveButton;
 
     public AddJobPageBase(WebDriver driver) {
         super(driver);
+        setUiLoadedMarker(descriptionField);
     }
 
-    public abstract void inputJobTitle(String title);
+    public void clickMenuButtonByHref(String href) {
+        leftMenu.getButtonByHref(href).click();
+    }
 
-    public abstract void inputDescription(String description);
+    public void inputJobTitle(String title) {
+        jobTitleField.type(title);
+    }
 
-    public abstract void clickSaveButton();
+    public void inputDescription(String description) {
+        descriptionField.type(description);
+    }
 
-    public abstract JobListPageBase addJobAndSave(String title, String description);
+    public void clickSaveButton() {
+        saveButton.click();
+    }
+
+    public JobListPageBase addJobAndSave(String title, String description) {
+        inputJobTitle(title);
+        inputDescription(description);
+        clickSaveButton();
+        return initPage(getDriver(), JobListPageBase.class);
+    }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JobMapper {
 
-    public static Job mapToJobFromWebElement(WebElement webElement) {
+    private static Job mapToJobFromWebElementDesktop(WebElement webElement) {
         List<WebElement> cells = webElement.findElements(By.xpath(".//*[@role='cell']"));
         return Job.builder()
                 .title(cells.get(1).getText())
@@ -17,9 +17,29 @@ public class JobMapper {
                 .build();
     }
 
-    public static List<Job> mapListToJob(List<ExtendedWebElement> elements) {
+    public static List<Job> mapJobsToListDesktop(List<ExtendedWebElement> elements) {
         return elements.stream()
-                .map(JobMapper::mapToJobFromWebElement)
+                .map(JobMapper::mapToJobFromWebElementDesktop)
+                .toList();
+    }
+
+    private static Job mapToJobFromWebElementMobile(WebElement webElement) {
+        List<WebElement> cells = webElement.findElements(By.xpath(".//div[@class='card-center']/*"));
+        String[] titles = cells.getFirst().getText().split("[\n\r]");
+        String[] descriptions = cells.get(1).getText().split("[\n\r]");
+        String description = null;
+        if (descriptions.length > 1) {
+            description = descriptions[1];
+        }
+        return Job.builder()
+                .title(titles[1])
+                .description(description)
+                .build();
+    }
+
+    public static List<Job> mapJobsToListMobile(List<ExtendedWebElement> elements) {
+        return elements.stream()
+                .map(JobMapper::mapToJobFromWebElementMobile)
                 .toList();
     }
 }

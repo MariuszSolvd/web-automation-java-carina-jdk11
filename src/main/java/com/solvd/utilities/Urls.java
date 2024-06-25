@@ -26,6 +26,7 @@ public interface Urls {
     //Href for Buttons
     String BASE_BUTTON_HREF = "/web/index.php";
     String PIM_BUTTON_HREF = BASE_BUTTON_HREF + CONFIG.get("pim.url");
+    String ADMIN_BUTTON_HREF = BASE_BUTTON_HREF + CONFIG.get("admin.href");
 
 
 }

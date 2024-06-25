@@ -1,17 +1,16 @@
 package com.solvd;
 
 import com.solvd.mapper.EmployeeMapper;
-import com.solvd.mapper.JobMapper;
 import com.solvd.model.Employee;
 import com.solvd.model.Job;
 import com.solvd.pages.common.DashboardPageBase;
 import com.solvd.pages.common.LoginPageBase;
 import com.solvd.pages.common.admin.AddJobPageBase;
+import com.solvd.pages.common.admin.AdminPageBase;
 import com.solvd.pages.common.admin.JobListPageBase;
 import com.solvd.pages.common.pim.AddEmployeePageBase;
 import com.solvd.pages.common.pim.EmployeePageBase;
 import com.solvd.pages.common.pim.PimPageBase;
-import com.solvd.pages.desktop.admin.*;
 import com.solvd.service.EmployeeService;
 import com.solvd.service.JobService;
 import com.solvd.service.LoginService;
@@ -19,9 +18,6 @@ import com.solvd.utilities.EmployeeWrapper;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -109,9 +105,9 @@ public class WebTest extends AbstractTest {
         LoginService loginService = new LoginService();
         DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(ADMIN_PAGE_URL);
+        dashboardPage.clickMenuButtonByHref(ADMIN_BUTTON_HREF);
 
-        AdminPage adminPage = new AdminPage(getDriver());
+        AdminPageBase adminPage = initPage(getDriver(), AdminPageBase.class);
         adminPage.assertPageOpened();
 
         JobListPageBase jobListPage = adminPage.getJobListPage();
@@ -124,8 +120,8 @@ public class WebTest extends AbstractTest {
         jobListPage = addJobPage.addJobAndSave(jobToAdd.getTitle(), jobToAdd.getDescription());
         jobListPage.assertPageOpened();
 
-        List<ExtendedWebElement> jobElements = jobListPage.getJobList();
-        List<Job> jobList = JobMapper.mapListToJob(jobElements);
+        List<ExtendedWebElement> jobElements = jobListPage.getJobElements();
+        List<Job> jobList = jobListPage.getJobList(jobElements);
 
         assertTrue(jobList.contains(jobToAdd));
     }

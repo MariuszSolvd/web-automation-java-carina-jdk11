@@ -1,5 +1,6 @@
 package com.solvd.pages.common.admin;
 
+import com.solvd.model.Job;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -10,12 +11,22 @@ import java.util.List;
 public abstract class JobListPageBase extends AbstractAdminPage {
 
     @Getter
-    @FindBy(xpath = "//div[@class = 'oxd-table-card']/*")
-    protected List<ExtendedWebElement> jobList;
+    @FindBy(xpath = "//i[contains(@class, 'bi-plus')]/parent::button")
+    private ExtendedWebElement addJobButton;
+    @FindBy(xpath = "//div[@role ='table']")
+    private ExtendedWebElement jobContainer;
 
     public JobListPageBase(WebDriver driver) {
         super(driver);
+        setUiLoadedMarker(jobContainer);
     }
 
-    public abstract AddJobPageBase clickAddJobButton();
+    public AddJobPageBase clickAddJobButton() {
+        addJobButton.click();
+        return initPage(getDriver(), AddJobPageBase.class);
+    }
+
+    public abstract List<ExtendedWebElement> getJobElements();
+
+    public abstract List<Job> getJobList(List<ExtendedWebElement> elements);
 }
