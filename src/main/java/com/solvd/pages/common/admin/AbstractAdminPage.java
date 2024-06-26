@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class AbstractAdminPage extends AbstractPageWithLeftMenu {
-    @FindBy(xpath = "//div[@class = 'orangehrm-container']")
+    @FindBy(xpath = "//div[@class = 'orangehrm-container']/*")
     protected ExtendedWebElement contentAdminContainer;
 
     public AbstractAdminPage(WebDriver driver) {

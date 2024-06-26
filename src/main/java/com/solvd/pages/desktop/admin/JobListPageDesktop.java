@@ -20,13 +20,8 @@ public class JobListPageDesktop extends JobListPageBase {
     }
 
     @Override
-    public List<ExtendedWebElement> getJobElements() {
-        return jobList;
-    }
-
-    @Override
-    public List<Job> getJobList(List<ExtendedWebElement> elements) {
-        return JobMapper.mapJobsToListDesktop(elements);
+    public List<Job> getJobList() {
+        return JobMapper.mapJobsToListDesktop(jobList);
     }
 
     @Override

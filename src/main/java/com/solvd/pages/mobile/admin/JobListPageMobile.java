@@ -24,13 +24,8 @@ public class JobListPageMobile extends JobListPageBase {
     }
 
     @Override
-    public List<ExtendedWebElement> getJobElements() {
-        return jobList;
-    }
-
-    @Override
-    public List<Job> getJobList(List<ExtendedWebElement> elements) {
-        return JobMapper.mapJobsToListMobile(elements);
+    public List<Job> getJobList() {
+        return JobMapper.mapJobsToListMobile(jobList);
     }
 
     @Override

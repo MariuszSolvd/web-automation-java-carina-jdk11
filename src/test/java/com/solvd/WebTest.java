@@ -120,8 +120,7 @@ public class WebTest extends AbstractTest {
         jobListPage = addJobPage.addJobAndSave(jobToAdd.getTitle(), jobToAdd.getDescription());
         jobListPage.assertPageOpened();
 
-        List<ExtendedWebElement> jobElements = jobListPage.getJobElements();
-        List<Job> jobList = jobListPage.getJobList(jobElements);
+        List<Job> jobList = jobListPage.getJobList();
 
         assertTrue(jobList.contains(jobToAdd));
     }

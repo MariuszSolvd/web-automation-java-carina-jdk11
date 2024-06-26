@@ -27,7 +27,5 @@ public abstract class JobListPageBase extends AbstractAdminPage {
         return initPage(getDriver(), AddJobPageBase.class);
     }
 
-    public abstract List<ExtendedWebElement> getJobElements();
-
-    public abstract List<Job> getJobList(List<ExtendedWebElement> elements);
+    public abstract List<Job> getJobList();
 }
