@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class DashboardPageBase extends AbstractPageWithLeftMenu {
-    @FindBy(xpath = "//div[@class='emp-attendance-chart']")
-    private ExtendedWebElement attendanceChart;
+    @FindBy(xpath = "//div[@class = 'orangehrm-attendance-card']")
+    private ExtendedWebElement attendanceCard;
 
     public DashboardPageBase(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(attendanceChart);
+        setUiLoadedMarker(attendanceCard);
     }
 }

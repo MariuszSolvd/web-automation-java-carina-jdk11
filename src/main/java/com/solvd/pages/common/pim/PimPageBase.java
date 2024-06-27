@@ -28,12 +28,12 @@ public abstract class PimPageBase extends AbstractPageWithLeftMenu {
     @FindBy(xpath = "//button[contains(@class, 'label-danger')]")
     protected ExtendedWebElement deleteConfirmationButton;
 
-    @FindBy(xpath = "//div[@class = 'orangehrm-container']")
-    protected ExtendedWebElement employeeContainer;
+    @FindBy(xpath = "//div[@role = 'rowgroup']")
+    protected ExtendedWebElement rowGroupElement;
 
     public PimPageBase(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(employeeContainer);
+        setUiLoadedMarker(rowGroupElement);
     }
 
     public AddEmployeePageBase clickAddEmployeeButton() {

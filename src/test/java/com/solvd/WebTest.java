@@ -57,7 +57,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 5)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
         DashboardPageBase dashboardPage = loginService.successfulLogin();
@@ -75,6 +75,7 @@ public class WebTest extends AbstractTest {
         employeePage.assertPageOpened();
         Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
         assertEquals(employeeReceived, employeeToAdd, "Employee does not contain same data");
+
     }
 
     //Test case 4
@@ -84,42 +85,46 @@ public class WebTest extends AbstractTest {
         DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
         dashboardPage.clickMenuButtonByHref(PIM_BUTTON_HREF);
-
+        //Open PIM page
         PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
         pimPage.assertPageOpened();
+        //Get list from PIM Page
         List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
+        //Get element to delete
         Employee employeeToDelete = pimPage.mapToEmployee(employeeElementList.getFirst());
         EmployeeWrapper employeeWrapper = new EmployeeWrapper(employeeElementList.getFirst());
         employeeWrapper.clickDeleteButton();
         pimPage.clickDeleteConfirmationButton();
+        //Search for deleted employee
         pimPage.inputIdEmployee(employeeToDelete.getIdEmployee());
         pimPage.clickSearchEmployeeButton();
+        //Creating list of current(after deletion) employee list
         List<Employee> employeeList = pimPage.mapToEmployeeList(employeeElementList);
 
         assertFalse(employeeList.contains(employeeToDelete), "Employee wasn't deleted");
     }
 
     //Test case 5
-    @Test(testName = "T5", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T5", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddJobTitle() {
         LoginService loginService = new LoginService();
         DashboardPageBase dashboardPage = loginService.successfulLogin();
         dashboardPage.assertPageOpened();
         dashboardPage.clickMenuButtonByHref(ADMIN_BUTTON_HREF);
-
+        //Navigate to Admin Page
         AdminPageBase adminPage = initPage(getDriver(), AdminPageBase.class);
         adminPage.assertPageOpened();
-
+        //From Admin Page click on job button and pick Job Titles
         JobListPageBase jobListPage = adminPage.getJobListPage();
         jobListPage.assertPageOpened();
-
+        //Click on add button and navigate to Add Job Page
         AddJobPageBase addJobPage = jobListPage.clickAddJobButton();
         addJobPage.assertPageOpened();
-
+        //Adding auto-generated job and redirection to JobListPage again
         Job jobToAdd = JobService.getJob();
         jobListPage = addJobPage.addJobAndSave(jobToAdd.getTitle(), jobToAdd.getDescription());
         jobListPage.assertPageOpened();
-
+        //Getting new(current) job list and asserting if auto-generated job has been added
         List<Job> jobList = jobListPage.getJobList();
 
         assertTrue(jobList.contains(jobToAdd));

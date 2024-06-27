@@ -52,7 +52,6 @@ public abstract class AddEmployeePageBase extends AbstractPageWithLeftMenu {
         inputLastName(employee.getLastName());
         inputIdEmployee(employee.getIdEmployee());
         clickSaveButton();
-        //TODO: Check during test if wait for it is enough in Carina
         return initPage(getDriver(), EmployeePageBase.class);
     }
 }

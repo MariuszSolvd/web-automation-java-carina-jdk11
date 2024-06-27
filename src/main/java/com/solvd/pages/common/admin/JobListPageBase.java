@@ -1,6 +1,7 @@
 package com.solvd.pages.common.admin;
 
 import com.solvd.model.Job;
+import com.solvd.utilities.Urls;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -18,8 +19,7 @@ public abstract class JobListPageBase extends AbstractAdminPage {
     private ExtendedWebElement jobContainer;
 
     public JobListPageBase(WebDriver driver) {
-        super(driver);
-        setUiLoadedMarker(jobContainer);
+        super(driver, Urls.JOB_LIST_PAGE_URL);
     }
 
     public AddJobPageBase clickAddJobButton() {
