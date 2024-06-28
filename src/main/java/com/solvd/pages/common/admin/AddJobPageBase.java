@@ -34,14 +34,10 @@ public abstract class AddJobPageBase extends PageWithLeftMenuBase {
         descriptionField.type(description);
     }
 
-    public void clickSaveButton() {
-        saveButton.click();
-    }
-
     public JobListPageBase addJobAndSave(String title, String description) {
         inputJobTitle(title);
         inputDescription(description);
-        clickSaveButton();
+        saveButton.click();
         return initPage(getDriver(), JobListPageBase.class);
     }
 }

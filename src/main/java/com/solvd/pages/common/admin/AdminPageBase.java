@@ -16,17 +16,9 @@ public abstract class AdminPageBase extends AbstractAdminPage {
         super(driver, Urls.ADMIN_PAGE_URL);
     }
 
-    public void clickJobButton() {
-        jobButton.click();
-    }
-
-    public void clickJobTitleButton() {
-        jobTitleButton.click();
-    }
-
     public JobListPageBase getJobListPage() {
-        clickJobButton();
-        clickJobTitleButton();
+        jobButton.click();
+        jobTitleButton.click();
         return initPage(getDriver(), JobListPageBase.class);
     }
 }
