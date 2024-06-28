@@ -1,14 +1,14 @@
-package com.solvd.pages.mobile.admin;
+package com.solvd.pages.mobile;
 
-
-import com.solvd.pages.common.admin.AdminPageBase;
+import com.solvd.pages.common.PageWithLeftMenuBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public abstract class AdminPageMobile extends AdminPageBase {
+public abstract class PageWithLeftMenuBaseMobile extends PageWithLeftMenuBase {
 
-    public AdminPageMobile(WebDriver driver) {
+    public PageWithLeftMenuBaseMobile(WebDriver driver) {
         super(driver);
+        setUiLoadedMarker(menuButton);
     }
 
     @Override

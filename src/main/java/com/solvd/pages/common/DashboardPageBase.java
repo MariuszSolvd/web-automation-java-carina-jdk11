@@ -4,7 +4,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class DashboardPageBase extends AbstractPageWithLeftMenu {
+public abstract class DashboardPageBase extends PageWithLeftMenuBase {
     @FindBy(xpath = "//div[@class = 'orangehrm-attendance-card']")
     private ExtendedWebElement attendanceCard;
 

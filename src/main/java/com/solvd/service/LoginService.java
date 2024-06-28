@@ -4,7 +4,6 @@ import com.solvd.pages.common.DashboardPageBase;
 import com.solvd.pages.common.LoginPageBase;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
-import org.openqa.selenium.WebDriver;
 
 public class LoginService implements ICustomTypePageFactory {
 

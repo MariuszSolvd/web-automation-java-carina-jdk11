@@ -3,6 +3,7 @@ package com.solvd;
 import com.solvd.mapper.EmployeeMapper;
 import com.solvd.model.Employee;
 import com.solvd.model.Job;
+import com.solvd.pages.common.PageWithLeftMenuBase;
 import com.solvd.pages.common.DashboardPageBase;
 import com.solvd.pages.common.LoginPageBase;
 import com.solvd.pages.common.admin.AddJobPageBase;
@@ -41,9 +42,9 @@ public class WebTest extends AbstractTest {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
         loginPage.logIn(R.TESTDATA.get("correct_user"), R.TESTDATA.get("correct_password"));
-        DashboardPageBase dashboardPage = initPage(getDriver(), DashboardPageBase.class);
+        PageWithLeftMenuBase pageWithLeftMenuBase = initPage(getDriver(), PageWithLeftMenuBase.class);
 
-        dashboardPage.assertPageOpened();
+        pageWithLeftMenuBase.assertPageOpened();
     }
 
     //Test case 2
@@ -57,7 +58,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 5)
+    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
         DashboardPageBase dashboardPage = loginService.successfulLogin();

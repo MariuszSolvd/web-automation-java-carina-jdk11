@@ -1,14 +1,25 @@
 package com.solvd.pages.mobile.admin;
 
-
 import com.solvd.pages.common.admin.AddJobPageBase;
-import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = AddJobPageBase.class)
-public class AddJobPageMobile extends AddJobPageBase {
 
-    public AddJobPageMobile(WebDriver webDriver) {
-        super(webDriver);
+public  class AddJobPageMobile extends AddJobPageBase {
+
+    public AddJobPageMobile(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    public void clickMenuButtonByHref(String href) {
+        getMenuByClick();
+        leftMenu.getButtonByHref(href).click();
+    }
+
+    @Override
+    public void getMenuByClick() {
+        menuButton.click();
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(leftMenu.getBy()), 30);
     }
 }

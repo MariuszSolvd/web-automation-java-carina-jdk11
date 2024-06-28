@@ -5,6 +5,7 @@ import com.solvd.model.Employee;
 import com.solvd.pages.common.pim.PimPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,11 @@ public class PimPageDesktop extends PimPageBase {
     @Override
     public void clickMenuButtonByHref(String href) {
         leftMenu.getButtonByHref(href).click();
+    }
+
+    @Override
+    public void getMenuByClick() {
+        throw new NotImplementedException("Not implemented for desktop");
     }
 
     @Override

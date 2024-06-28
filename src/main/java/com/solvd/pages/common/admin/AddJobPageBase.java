@@ -1,12 +1,12 @@
 package com.solvd.pages.common.admin;
 
-import com.solvd.pages.common.AbstractPageWithLeftMenu;
+import com.solvd.pages.common.PageWithLeftMenuBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 
-public abstract class AddJobPageBase extends AbstractPageWithLeftMenu {
+public abstract class AddJobPageBase extends PageWithLeftMenuBase {
     @FindBy(xpath = "//div[@class = 'oxd-form-row']//input[contains(@class, 'oxd-input')]")
     private ExtendedWebElement jobTitleField;
 

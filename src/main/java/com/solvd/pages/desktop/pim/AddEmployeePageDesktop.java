@@ -4,28 +4,12 @@ import com.solvd.model.Employee;
 import com.solvd.pages.common.pim.AddEmployeePageBase;
 import com.solvd.pages.common.pim.EmployeePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = AddEmployeePageBase.class)
 public class AddEmployeePageDesktop extends AddEmployeePageBase {
-
-    @FindBy(name = "firstName")
-    private ExtendedWebElement fistNameField;
-
-    @FindBy(name = "middleName")
-    private ExtendedWebElement middleNameField;
-
-    @FindBy(name = "lastName")
-    private ExtendedWebElement lastNameField;
-
-    @FindBy(xpath = "//div[label[contains(text(), \"Employee Id\")]]/following-sibling::*/input")
-    private ExtendedWebElement idEmployeeField;
-
-    @FindBy(xpath = "//button[@type = 'submit']")
-    private ExtendedWebElement saveButton;
 
     public AddEmployeePageDesktop(WebDriver webDriver) {
         super(webDriver);
@@ -57,5 +41,10 @@ public class AddEmployeePageDesktop extends AddEmployeePageBase {
         inputIdEmployee(employee.getIdEmployee());
         clickSaveButton();
         return initPage(getDriver(), EmployeePageBase.class);
+    }
+
+    @Override
+    public void getMenuByClick() {
+        throw new NotImplementedException("Not implemented for desktop");
     }
 }

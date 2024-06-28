@@ -1,14 +1,14 @@
-package com.solvd.pages.ios;
+package com.solvd.pages.mobile.android;
 
 import com.solvd.pages.common.LoginPageBase;
+import com.zebrunner.carina.utils.android.IAndroidUtils;
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.ios.IOSUtils;
 import org.openqa.selenium.WebDriver;
 
-@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = LoginPageBase.class)
-public class LoginPageIOs extends LoginPageBase implements IOSUtils {
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
+public class LoginPageAndroid extends LoginPageBase implements IAndroidUtils {
 
-    public LoginPageIOs(WebDriver webDriver) {
+    public LoginPageAndroid(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -16,6 +16,7 @@ public class LoginPageIOs extends LoginPageBase implements IOSUtils {
     public void logIn(String username, String password) {
         inputUsername(username);
         inputPassword(password);
+        pressBack();
         clickLoginButton();
     }
 }

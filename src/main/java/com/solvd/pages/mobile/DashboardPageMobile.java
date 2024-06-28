@@ -1,10 +1,10 @@
 package com.solvd.pages.mobile;
 
 import com.solvd.pages.common.DashboardPageBase;
-import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = DashboardPageBase.class)
+
 public class DashboardPageMobile extends DashboardPageBase {
 
     public DashboardPageMobile(WebDriver driver) {
@@ -15,5 +15,11 @@ public class DashboardPageMobile extends DashboardPageBase {
     public void clickMenuButtonByHref(String href) {
         getMenuByClick();
         leftMenu.getButtonByHref(href).click();
+    }
+
+    @Override
+    public void getMenuByClick() {
+        menuButton.click();
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(leftMenu.getBy()), 30);
     }
 }

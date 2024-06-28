@@ -1,35 +1,36 @@
 package com.solvd.pages.mobile.pim;
 
 import com.solvd.pages.common.pim.EmployeePageBase;
-import com.zebrunner.carina.utils.factory.DeviceType;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = EmployeePageBase.class)
-public class EmployeePageMobile extends EmployeePageBase {
-    public EmployeePageMobile(WebDriver driver) {
-        super(driver);
+
+public abstract class EmployeePageMobile extends EmployeePageBase {
+
+    public EmployeePageMobile(WebDriver webDriver) {
+        super(webDriver);
     }
 
     @Override
     public String getFirstNameText() {
-        return getValueFromElement(firstNameField.getElement());
+        return getValueWrapper(firstNameField);
     }
 
     @Override
     public String getMiddleNameText() {
-        return getValueFromElement(middleNameField.getElement());
+        return getValueWrapper(middleNameField);
     }
 
     @Override
     public String getLastNameText() {
-        return getValueFromElement(lastNameField.getElement());
+        return getValueWrapper(lastNameField);
     }
 
     @Override
     public String getIdEmployeeText() {
-        return getValueFromElement(idEmployeeField.getElement());
+        return getValueWrapper(idEmployeeField);
     }
 
     @Override
@@ -38,8 +39,14 @@ public class EmployeePageMobile extends EmployeePageBase {
         leftMenu.getButtonByHref(href).click();
     }
 
-    private String getValueFromElement(WebElement element) {
+    @Override
+    public void getMenuByClick() {
+        menuButton.click();
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(leftMenu.getBy()), 30);
+    }
+
+    private String getValueWrapper(ExtendedWebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) this.getDriver();
-        return (String) js.executeScript("return arguments[0].value;", element);
+        return (String) js.executeScript("return arguments[0].value;", element.getElement());
     }
 }

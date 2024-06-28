@@ -5,6 +5,7 @@ import com.solvd.model.Job;
 import com.solvd.pages.common.admin.JobListPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,5 +28,10 @@ public class JobListPageDesktop extends JobListPageBase {
     @Override
     public void clickMenuButtonByHref(String href) {
         leftMenu.getButtonByHref(href).click();
+    }
+
+    @Override
+    public void getMenuByClick() {
+        throw new NotImplementedException("Not implemented for desktop");
     }
 }

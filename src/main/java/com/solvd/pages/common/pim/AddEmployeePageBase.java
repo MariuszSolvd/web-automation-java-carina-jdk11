@@ -1,12 +1,12 @@
 package com.solvd.pages.common.pim;
 
 import com.solvd.model.Employee;
-import com.solvd.pages.common.AbstractPageWithLeftMenu;
+import com.solvd.pages.common.PageWithLeftMenuBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class AddEmployeePageBase extends AbstractPageWithLeftMenu {
+public abstract class AddEmployeePageBase extends PageWithLeftMenuBase {
     @FindBy(name = "firstName")
     private ExtendedWebElement fistNameField;
 

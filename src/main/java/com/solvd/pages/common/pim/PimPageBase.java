@@ -1,7 +1,7 @@
 package com.solvd.pages.common.pim;
 
 import com.solvd.model.Employee;
-import com.solvd.pages.common.AbstractPageWithLeftMenu;
+import com.solvd.pages.common.PageWithLeftMenuBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public abstract class PimPageBase extends AbstractPageWithLeftMenu {
+public abstract class PimPageBase extends PageWithLeftMenuBase {
 
     @Getter
     @FindBy(xpath = "//div[@role = 'rowgroup']/div[contains(@class, 'oxd-table-card')]/*")
