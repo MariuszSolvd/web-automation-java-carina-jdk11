@@ -43,7 +43,6 @@ public class WebTest extends AbstractTest {
         loginPage.open();
         loginPage.logIn(R.TESTDATA.get("correct_user"), R.TESTDATA.get("correct_password"));
         PageWithLeftMenuBase pageWithLeftMenuBase = initPage(getDriver(), PageWithLeftMenuBase.class);
-
         pageWithLeftMenuBase.assertPageOpened();
     }
 
@@ -61,9 +60,9 @@ public class WebTest extends AbstractTest {
     @Test(testName = "T3", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
-        DashboardPageBase dashboardPage = loginService.successfulLogin();
-        dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(PIM_BUTTON_HREF);
+        PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
+        pageWithLeftMenuBase.assertPageOpened();
+        pageWithLeftMenuBase.clickMenuButtonByHref(PIM_BUTTON_HREF);
 
         PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
         pimPage.assertPageOpened();
@@ -73,19 +72,21 @@ public class WebTest extends AbstractTest {
 
         Employee employeeToAdd = EmployeeService.getEmployee();
         EmployeePageBase employeePage = addEmployeePage.addEmployee(employeeToAdd);
+        //FIXME: Improve loading and assertion
         employeePage.assertPageOpened();
         Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
+        //FIXME:Improve loading
         assertEquals(employeeReceived, employeeToAdd, "Employee does not contain same data");
 
     }
 
     //Test case 4
-    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 4)
     public void shouldDeleteEmployee() {
         LoginService loginService = new LoginService();
-        DashboardPageBase dashboardPage = loginService.successfulLogin();
-        dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(PIM_BUTTON_HREF);
+        PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
+        pageWithLeftMenuBase.assertPageOpened();
+        pageWithLeftMenuBase.clickMenuButtonByHref(PIM_BUTTON_HREF);
         //Open PIM page
         PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
         pimPage.assertPageOpened();
@@ -109,9 +110,9 @@ public class WebTest extends AbstractTest {
     @Test(testName = "T5", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddJobTitle() {
         LoginService loginService = new LoginService();
-        DashboardPageBase dashboardPage = loginService.successfulLogin();
-        dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(ADMIN_BUTTON_HREF);
+        PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
+        pageWithLeftMenuBase.assertPageOpened();
+        pageWithLeftMenuBase.clickMenuButtonByHref(ADMIN_BUTTON_HREF);
         //Navigate to Admin Page
         AdminPageBase adminPage = initPage(getDriver(), AdminPageBase.class);
         adminPage.assertPageOpened();
