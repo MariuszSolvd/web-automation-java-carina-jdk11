@@ -4,7 +4,6 @@ import com.solvd.mapper.EmployeeMapper;
 import com.solvd.model.Employee;
 import com.solvd.model.Job;
 import com.solvd.pages.common.PageWithLeftMenuBase;
-import com.solvd.pages.common.DashboardPageBase;
 import com.solvd.pages.common.LoginPageBase;
 import com.solvd.pages.common.admin.AddJobPageBase;
 import com.solvd.pages.common.admin.AdminPageBase;
@@ -57,7 +56,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 3)
+    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 10)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
         PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
@@ -72,10 +71,9 @@ public class WebTest extends AbstractTest {
 
         Employee employeeToAdd = EmployeeService.getEmployee();
         EmployeePageBase employeePage = addEmployeePage.addEmployee(employeeToAdd);
-        //FIXME: Improve loading and assertion
         employeePage.assertPageOpened();
+        employeePage.waitForDataToLoad();
         Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
-        //FIXME:Improve loading
         assertEquals(employeeReceived, employeeToAdd, "Employee does not contain same data");
 
     }

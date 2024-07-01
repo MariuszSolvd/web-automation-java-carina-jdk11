@@ -2,7 +2,9 @@ package com.solvd.pages.common.pim;
 
 import com.solvd.model.Employee;
 import com.solvd.pages.common.PageWithLeftMenuBase;
+import com.solvd.utilities.Urls;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,11 +30,13 @@ public abstract class PimPageBase extends PageWithLeftMenuBase {
     @FindBy(xpath = "//button[contains(@class, 'label-danger')]")
     protected ExtendedWebElement deleteConfirmationButton;
 
-    @FindBy(xpath = "//div[@role = 'rowgroup']")
+    @FindBy(xpath = "//div[contains(@class, 'oxd-table-body')]")
     protected ExtendedWebElement rowGroupElement;
 
     public PimPageBase(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_URL_AND_ELEMENT);
+        setPageAbsoluteURL(Urls.EMPLOYEES_VIEW_PAGE_URL);
         setUiLoadedMarker(rowGroupElement);
     }
 
