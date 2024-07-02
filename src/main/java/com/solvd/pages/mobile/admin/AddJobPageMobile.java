@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public  class AddJobPageMobile extends AddJobPageBase {
+public abstract class AddJobPageMobile extends AddJobPageBase {
 
     public AddJobPageMobile(WebDriver driver) {
         super(driver);
