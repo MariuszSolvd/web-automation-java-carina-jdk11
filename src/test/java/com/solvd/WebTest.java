@@ -36,7 +36,7 @@ public class WebTest extends AbstractTest {
 
 
     //Test case 1
-    @Test(testName = "T1", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T1", threadPoolSize = 1, invocationCount = 3)
     public void shouldLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
@@ -46,7 +46,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 2
-    @Test(testName = "T2", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T2", threadPoolSize = 1, invocationCount = 3)
     public void shouldNotLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
@@ -56,7 +56,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 10)
+    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
         PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
@@ -79,7 +79,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 4
-    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 4)
+    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 3)
     public void shouldDeleteEmployee() {
         LoginService loginService = new LoginService();
         PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
