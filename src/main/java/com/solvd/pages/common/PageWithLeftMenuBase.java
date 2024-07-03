@@ -15,6 +15,12 @@ public abstract class PageWithLeftMenuBase extends AbstractPage {
     @FindBy(xpath = "//i[contains(@class, 'hamburger')]")
     protected ExtendedWebElement menuButton;
 
+    @FindBy(xpath = "//i[contains(@class, 'oxd-userdropdown-icon')]")
+    private ExtendedWebElement userButton;
+
+    @FindBy(xpath = "//a[contains(@href, '/web/index.php/auth/logout')]")
+    private ExtendedWebElement logoutButton;
+
     public PageWithLeftMenuBase(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(leftMenu);
@@ -23,4 +29,10 @@ public abstract class PageWithLeftMenuBase extends AbstractPage {
     public abstract void clickMenuButtonByHref(String href);
 
     public abstract void getMenuByClick();
+
+    public LoginPageBase logout() {
+        userButton.click();
+        logoutButton.click();
+        return initPage(getDriver(), LoginPageBase.class);
+    }
 }
