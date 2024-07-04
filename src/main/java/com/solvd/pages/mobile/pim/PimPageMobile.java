@@ -4,7 +4,6 @@ import com.solvd.mapper.EmployeeMapper;
 import com.solvd.model.Employee;
 import com.solvd.pages.common.pim.PimPageBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,7 +18,7 @@ public abstract class PimPageMobile extends PimPageBase {
         super(webDriver);
     }
 
-    @FindBy(xpath = "//div[@class = 'oxd-table-filter-header']//button")
+    @FindBy(xpath = "//div[contains(@class,  'oxd-table-filter-header')]//button")
     private ExtendedWebElement openSearchButton;
 
     @Override
@@ -43,10 +42,7 @@ public abstract class PimPageMobile extends PimPageBase {
     @Override
     public void inputIdEmployee(String id) {
         clickOpenSearchButton();
-        idEmployeeField.click();
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
-        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
-        idEmployeeField.type(id);
+        super.inputIdEmployee(id);
     }
 
     @Override

@@ -22,7 +22,6 @@ public class LeftMenu extends AbstractUIObject {
     public ExtendedWebElement getButtonByHref(String href) {
         return menuButtons.stream()
                 .filter(button -> button.getAttribute("href").contains(href))
-                .findFirst()
-                .get();
+                .findAny().get();
     }
 }

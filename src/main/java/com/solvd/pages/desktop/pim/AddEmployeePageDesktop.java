@@ -1,8 +1,6 @@
 package com.solvd.pages.desktop.pim;
 
-import com.solvd.model.Employee;
 import com.solvd.pages.common.pim.AddEmployeePageBase;
-import com.solvd.pages.common.pim.EmployeePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -31,16 +29,6 @@ public class AddEmployeePageDesktop extends AddEmployeePageBase {
     @Override
     public void clickSaveButton() {
         saveButton.click();
-    }
-
-    @Override
-    public EmployeePageBase addEmployee(Employee employee) {
-        inputFirstName(employee.getFirstName());
-        inputMiddleName(employee.getMiddleName());
-        inputLastName(employee.getLastName());
-        inputIdEmployee(employee.getIdEmployee());
-        clickSaveButton();
-        return initPage(getDriver(), EmployeePageBase.class);
     }
 
     @Override

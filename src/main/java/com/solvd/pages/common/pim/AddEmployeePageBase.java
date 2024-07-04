@@ -22,7 +22,7 @@ public abstract class AddEmployeePageBase extends PageWithLeftMenuBase {
     @FindBy(xpath = "//button[@type = 'submit']")
     protected ExtendedWebElement saveButton;
 
-    @FindBy(xpath = "//div[@class = 'employee-image-wrapper']")
+    @FindBy(xpath = "//div[contains(@class, 'employee-image-wrapper')]")
     private ExtendedWebElement employeeImage;
 
     public AddEmployeePageBase(WebDriver driver) {

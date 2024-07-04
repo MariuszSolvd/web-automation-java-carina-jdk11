@@ -9,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 
 @Getter
 public abstract class PageWithLeftMenuBase extends AbstractPage {
-    @FindBy(xpath = "//nav[@class= 'oxd-navbar-nav']")
+
+    @FindBy(xpath = "//nav[@class='oxd-navbar-nav']")
     protected LeftMenu leftMenu;
 
     @FindBy(xpath = "//i[contains(@class, 'hamburger')]")

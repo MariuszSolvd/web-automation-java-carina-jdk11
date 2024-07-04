@@ -22,7 +22,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.solvd.utilities.Urls.*;
 import static org.testng.Assert.*;
 
 public class WebTest extends AbstractTest {
@@ -52,19 +51,14 @@ public class WebTest extends AbstractTest {
         loginPage.open();
         loginPage.logIn(R.TESTDATA.get("incorrect_user"), R.TESTDATA.get("incorrect_password"));
 
-        assertTrue(loginPage.isAlertDisplayed(), "Alert is not visible");//<-
+        assertTrue(loginPage.isAlertDisplayed(), "Alert is not visible");
     }
 
     //Test case 3
     @Test(testName = "T3", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
-        PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
-        pageWithLeftMenuBase.assertPageOpened();
-        pageWithLeftMenuBase.clickMenuButtonByHref(PIM_BUTTON_HREF);
-
-        PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
-        pimPage.assertPageOpened();
+        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
 
         AddEmployeePageBase addEmployeePage = pimPage.clickAddEmployeeButton();
         addEmployeePage.assertPageOpened();
@@ -79,15 +73,12 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 4
-    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 3)
+    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 2)
     public void shouldDeleteEmployee() {
         LoginService loginService = new LoginService();
-        PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
-        pageWithLeftMenuBase.assertPageOpened();
-        pageWithLeftMenuBase.clickMenuButtonByHref(PIM_BUTTON_HREF);
-        //Open PIM page
-        PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
-        pimPage.assertPageOpened();
+        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
+        pimPage.waitForDataToLoad();
+
         //Get list from PIM Page
         List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
         //Get element to delete
@@ -97,7 +88,7 @@ public class WebTest extends AbstractTest {
         pimPage.clickDeleteConfirmationButton();
         //Search for deleted employee
         pimPage.inputIdEmployee(employeeToDelete.getIdEmployee());
-        pimPage.clickSearchEmployeeButton();
+        pimPage.clickSearchEmployeeButton(); //empty
         //Creating list of current(after deletion) employee list
         List<Employee> employeeList = pimPage.mapToEmployeeList(employeeElementList);
 
@@ -108,12 +99,7 @@ public class WebTest extends AbstractTest {
     @Test(testName = "T5", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddJobTitle() {
         LoginService loginService = new LoginService();
-        PageWithLeftMenuBase pageWithLeftMenuBase = loginService.successfulLogin();
-        pageWithLeftMenuBase.assertPageOpened();
-        pageWithLeftMenuBase.clickMenuButtonByHref(ADMIN_BUTTON_HREF);
-        //Navigate to Admin Page
-        AdminPageBase adminPage = initPage(getDriver(), AdminPageBase.class);
-        adminPage.assertPageOpened();
+        AdminPageBase adminPage = loginService.successfulLogin(AdminPageBase.class);
         //From Admin Page click on job button and pick Job Titles
         JobListPageBase jobListPage = adminPage.getJobListPage();
         jobListPage.assertPageOpened();

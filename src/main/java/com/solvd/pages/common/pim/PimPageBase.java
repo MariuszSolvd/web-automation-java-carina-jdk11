@@ -6,9 +6,12 @@ import com.solvd.utilities.Urls;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import lombok.Getter;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -47,13 +50,23 @@ public abstract class PimPageBase extends PageWithLeftMenuBase {
 
     public abstract void clickSearchEmployeeButton();
 
-    public abstract void inputIdEmployee(String id);
+    public void inputIdEmployee(String id) {
+        idEmployeeField.click();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
+        idEmployeeField.type(id);
+    }
 
     public void clickDeleteConfirmationButton() {
+        waitUntil(ExpectedConditions.elementToBeClickable(deleteConfirmationButton), 30);
         deleteConfirmationButton.click();
     }
 
     public abstract Employee mapToEmployee(WebElement webElement);
 
     public abstract List<Employee> mapToEmployeeList(List<ExtendedWebElement> employees);
+
+    public void waitForDataToLoad() {
+        waitUntil((ExpectedCondition<Boolean>) input -> !employeeList.isEmpty(), 30);
+    }
 }
