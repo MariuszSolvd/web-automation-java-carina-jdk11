@@ -1,17 +1,16 @@
 package com.solvd;
 
 import com.solvd.mapper.EmployeeMapper;
-import com.solvd.mapper.JobMapper;
 import com.solvd.model.Employee;
 import com.solvd.model.Job;
-import com.solvd.pages.common.DashboardPageBase;
+import com.solvd.pages.common.PageWithLeftMenuBase;
 import com.solvd.pages.common.LoginPageBase;
 import com.solvd.pages.common.admin.AddJobPageBase;
+import com.solvd.pages.common.admin.AdminPageBase;
 import com.solvd.pages.common.admin.JobListPageBase;
 import com.solvd.pages.common.pim.AddEmployeePageBase;
 import com.solvd.pages.common.pim.EmployeePageBase;
 import com.solvd.pages.common.pim.PimPageBase;
-import com.solvd.pages.desktop.admin.*;
 import com.solvd.service.EmployeeService;
 import com.solvd.service.JobService;
 import com.solvd.service.LoginService;
@@ -19,14 +18,10 @@ import com.solvd.utilities.EmployeeWrapper;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.solvd.utilities.Urls.*;
 import static org.testng.Assert.*;
 
 public class WebTest extends AbstractTest {
@@ -40,36 +35,30 @@ public class WebTest extends AbstractTest {
 
 
     //Test case 1
-    @Test(testName = "T1", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T1", threadPoolSize = 1, invocationCount = 3)
     public void shouldLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
         loginPage.logIn(R.TESTDATA.get("correct_user"), R.TESTDATA.get("correct_password"));
-        DashboardPageBase dashboardPage = initPage(getDriver(), DashboardPageBase.class);
-
-        dashboardPage.assertPageOpened();
+        PageWithLeftMenuBase pageWithLeftMenuBase = initPage(getDriver(), PageWithLeftMenuBase.class);
+        pageWithLeftMenuBase.assertPageOpened();
     }
 
     //Test case 2
-    @Test(testName = "T2", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T2", threadPoolSize = 1, invocationCount = 3)
     public void shouldNotLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
         loginPage.logIn(R.TESTDATA.get("incorrect_user"), R.TESTDATA.get("incorrect_password"));
 
-        assertTrue(loginPage.isAlertDisplayed(), "Alert is not visible");//<-
+        assertTrue(loginPage.isAlertDisplayed(), "Alert is not visible");
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
-        DashboardPageBase dashboardPage = loginService.successfulLogin();
-        dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(PIM_BUTTON_HREF);
-
-        PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
-        pimPage.assertPageOpened();
+        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
 
         AddEmployeePageBase addEmployeePage = pimPage.clickAddEmployeeButton();
         addEmployeePage.assertPageOpened();
@@ -77,55 +66,52 @@ public class WebTest extends AbstractTest {
         Employee employeeToAdd = EmployeeService.getEmployee();
         EmployeePageBase employeePage = addEmployeePage.addEmployee(employeeToAdd);
         employeePage.assertPageOpened();
+        employeePage.waitForDataToLoad();
         Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
         assertEquals(employeeReceived, employeeToAdd, "Employee does not contain same data");
+
     }
 
     //Test case 4
-    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 2)
     public void shouldDeleteEmployee() {
         LoginService loginService = new LoginService();
-        DashboardPageBase dashboardPage = loginService.successfulLogin();
-        dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(PIM_BUTTON_HREF);
+        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
+        pimPage.waitForDataToLoad();
 
-        PimPageBase pimPage = initPage(getDriver(), PimPageBase.class);
-        pimPage.assertPageOpened();
+        //Get list from PIM Page
         List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
+        //Get element to delete
         Employee employeeToDelete = pimPage.mapToEmployee(employeeElementList.getFirst());
         EmployeeWrapper employeeWrapper = new EmployeeWrapper(employeeElementList.getFirst());
         employeeWrapper.clickDeleteButton();
         pimPage.clickDeleteConfirmationButton();
+        //Search for deleted employee
         pimPage.inputIdEmployee(employeeToDelete.getIdEmployee());
-        pimPage.clickSearchEmployeeButton();
+        pimPage.clickSearchEmployeeButton(); //empty
+        //Creating list of current(after deletion) employee list
         List<Employee> employeeList = pimPage.mapToEmployeeList(employeeElementList);
 
         assertFalse(employeeList.contains(employeeToDelete), "Employee wasn't deleted");
     }
 
     //Test case 5
-    @Test(testName = "T5", threadPoolSize = 1, invocationCount = 1)
+    @Test(testName = "T5", threadPoolSize = 1, invocationCount = 3)
     public void shouldAddJobTitle() {
         LoginService loginService = new LoginService();
-        DashboardPageBase dashboardPage = loginService.successfulLogin();
-        dashboardPage.assertPageOpened();
-        dashboardPage.clickMenuButtonByHref(ADMIN_PAGE_URL);
-
-        AdminPage adminPage = new AdminPage(getDriver());
-        adminPage.assertPageOpened();
-
+        AdminPageBase adminPage = loginService.successfulLogin(AdminPageBase.class);
+        //From Admin Page click on job button and pick Job Titles
         JobListPageBase jobListPage = adminPage.getJobListPage();
         jobListPage.assertPageOpened();
-
+        //Click on add button and navigate to Add Job Page
         AddJobPageBase addJobPage = jobListPage.clickAddJobButton();
         addJobPage.assertPageOpened();
-
+        //Adding auto-generated job and redirection to JobListPage again
         Job jobToAdd = JobService.getJob();
         jobListPage = addJobPage.addJobAndSave(jobToAdd.getTitle(), jobToAdd.getDescription());
         jobListPage.assertPageOpened();
-
-        List<ExtendedWebElement> jobElements = jobListPage.getJobList();
-        List<Job> jobList = JobMapper.mapListToJob(jobElements);
+        //Getting new(current) job list and asserting if auto-generated job has been added
+        List<Job> jobList = jobListPage.getJobList();
 
         assertTrue(jobList.contains(jobToAdd));
     }

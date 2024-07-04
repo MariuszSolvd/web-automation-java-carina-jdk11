@@ -1,4 +1,4 @@
-package com.solvd.pages.mobile;
+package com.solvd.pages.mobile.android;
 
 import com.solvd.pages.common.LoginPageBase;
 import com.zebrunner.carina.utils.android.IAndroidUtils;
@@ -6,9 +6,9 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
-public class LoginPageMobile extends LoginPageBase implements IAndroidUtils {
+public class LoginPageAndroid extends LoginPageBase implements IAndroidUtils {
 
-    public LoginPageMobile(WebDriver webDriver) {
+    public LoginPageAndroid(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -19,6 +19,4 @@ public class LoginPageMobile extends LoginPageBase implements IAndroidUtils {
         pressBack();
         clickLoginButton();
     }
-
-
 }

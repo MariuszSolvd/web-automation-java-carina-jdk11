@@ -3,24 +3,34 @@ package com.solvd.pages.mobile.pim;
 import com.solvd.mapper.EmployeeMapper;
 import com.solvd.model.Employee;
 import com.solvd.pages.common.pim.PimPageBase;
-import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = PimPageBase.class)
-public class PimPageMobile extends PimPageBase {
-    @FindBy(xpath = "//div[@class = 'oxd-table-filter-header-options']//button")
-    private ExtendedWebElement infoButton;
-    @FindBy(xpath = "//div[@class = 'oxd-table-filter-header']//button")
+
+public abstract class PimPageMobile extends PimPageBase {
+
+    public PimPageMobile(WebDriver webDriver) {
+        super(webDriver);
+    }
+
+    @FindBy(xpath = "//div[contains(@class,  'oxd-table-filter-header')]//button")
     private ExtendedWebElement openSearchButton;
 
-    public PimPageMobile(WebDriver driver) {
-        super(driver);
+    @Override
+    public void clickMenuButtonByHref(String href) {
+        getMenuByClick();
+        leftMenu.getButtonByHref(href).click();
+    }
+
+    @Override
+    public void getMenuByClick() {
+        menuButton.click();
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(leftMenu.getBy()), 30);
     }
 
     @Override
@@ -32,11 +42,7 @@ public class PimPageMobile extends PimPageBase {
     @Override
     public void inputIdEmployee(String id) {
         clickOpenSearchButton();
-        idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
-        jsExecutor.executeScript("arguments[0].value='';", idEmployeeField.getElement());
-        idEmployeeField.type(id);
+        super.inputIdEmployee(id);
     }
 
     @Override
@@ -46,16 +52,10 @@ public class PimPageMobile extends PimPageBase {
 
     @Override
     public List<Employee> mapToEmployeeList(List<ExtendedWebElement> employees) {
-        return EmployeeMapper.mapListToEmployeesMobile(employees);
+        return EmployeeMapper.mapListToEmployeesMobile(employeeList);
     }
 
-    @Override
-    public void clickMenuButtonByHref(String href) {
-        getMenuByClick();
-        leftMenu.getButtonByHref(href).click();
-    }
-
-    private void clickOpenSearchButton() {
+    protected void clickOpenSearchButton() {
         openSearchButton.scrollTo();
         openSearchButton.click();
     }

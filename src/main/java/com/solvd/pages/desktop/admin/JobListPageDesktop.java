@@ -1,22 +1,28 @@
 package com.solvd.pages.desktop.admin;
 
-import com.solvd.pages.common.admin.AddJobPageBase;
+import com.solvd.mapper.JobMapper;
+import com.solvd.model.Job;
 import com.solvd.pages.common.admin.JobListPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = JobListPageBase.class)
-public class JobListPage extends JobListPageBase {
-    @FindBy(xpath = "//i[contains(@class, 'bi-plus')]/parent::button")
-    private ExtendedWebElement addJobButton;
+public class JobListPageDesktop extends JobListPageBase {
+
     @FindBy(xpath = "//div[@class = 'oxd-table-card']/*")
     private List<ExtendedWebElement> jobList;
 
-    public JobListPage(WebDriver webDriver) {
+    public JobListPageDesktop(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    public List<Job> getJobList() {
+        return JobMapper.mapJobsToListDesktop(jobList);
     }
 
     @Override
@@ -24,9 +30,8 @@ public class JobListPage extends JobListPageBase {
         leftMenu.getButtonByHref(href).click();
     }
 
-    public AddJobPageBase clickAddJobButton() {
-        addJobButton.click();
-        return initPage(getDriver(), AddJobPageBase.class);
+    @Override
+    public void getMenuByClick() {
+        throw new NotImplementedException("Not implemented for desktop");
     }
-
 }

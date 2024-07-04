@@ -1,36 +1,28 @@
 package com.solvd.pages.mobile.pim;
 
 import com.solvd.pages.common.pim.AddEmployeePageBase;
-import com.zebrunner.carina.utils.android.IAndroidUtils;
-import com.zebrunner.carina.utils.factory.DeviceType;
-import io.appium.java_client.android.nativekey.AndroidKey;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = AddEmployeePageBase.class)
-public class AddEmployeePageMobile extends AddEmployeePageBase implements IAndroidUtils {
 
-    public AddEmployeePageMobile(WebDriver driver) {
-        super(driver);
+public abstract class AddEmployeePageMobile extends AddEmployeePageBase {
+
+    public AddEmployeePageMobile(WebDriver webDriver) {
+        super(webDriver);
     }
 
-    @Override
     protected void inputIdEmployee(String id) {
         waitUntil(ExpectedConditions.elementToBeClickable(idEmployeeField), 20);
         idEmployeeField.click();
         idEmployeeField.click();
-        //Is it only one way,  that works in Carina since method clear() is not implemented??
-        for (int i = 0; i < 4; i++) {
-            pressKeyboardKey(AndroidKey.DEL);
-        }
+        deleteId();
         idEmployeeField.type(id);
     }
 
     @Override
-    public void clickSaveButton() {
-        pressBack();
-        swipe(saveButton);
-        saveButton.click();
+    public void getMenuByClick() {
+        menuButton.click();
+        waitUntil(ExpectedConditions.visibilityOfElementLocated(leftMenu.getBy()), 30);
     }
 
     @Override
@@ -38,4 +30,6 @@ public class AddEmployeePageMobile extends AddEmployeePageBase implements IAndro
         getMenuByClick();
         leftMenu.getButtonByHref(href).click();
     }
+
+    protected abstract void deleteId();
 }

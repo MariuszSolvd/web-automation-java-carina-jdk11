@@ -40,14 +40,14 @@ public class EmployeeMapper {
 
     public static Employee mapToEmployeeFromWebElementMobile(WebElement webElement) {
         List<WebElement> cells = webElement.findElements(By.xpath(".//*[@role='cell']"));
-        String[] findId = cells.getFirst().getText().split("[\n\r]");
-        String[] names = cells.get(2).getText().split("[\n\r]");
+        String[] findId = cells.getFirst().getText().split("\\R");
+        String[] names = cells.get(2).getText().split("\\R");
         String[] name = names[1].split(" ");
         String middleName = null;
         if (name.length > 1) {
             middleName = name[1];
         }
-        String[] lastName = cells.get(3).getText().split("[\n\r]");
+        String[] lastName = cells.get(3).getText().split("\\R");
 
         return Employee.builder()
                 .firstName(name[0])
