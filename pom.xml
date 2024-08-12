@@ -43,7 +43,6 @@
             <version>${lombok.ver}</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
 </project>
