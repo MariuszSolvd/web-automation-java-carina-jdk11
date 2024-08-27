@@ -1,0 +1,32 @@
+services:
+  selenoid:
+    image: aerokube/selenoid:1.11.3
+    ports:
+      - 4444:4444
+    network_mode: bridge
+    volumes:
+      - ./config/browsers.json:/etc/selenoid/browsers.json
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $PWD/config/video:/opt/selenoid/video
+    environment:
+      - OVERRIDE_VIDEO_OUTPUT_DIR=$PWD/config/video
+
+  selenoid-ui:
+    image: aerokube/selenoid-ui:1.10.11
+    ports:
+      - 8080:8080
+    network_mode: bridge
+    links:
+      - selenoid
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+
+  ggr:
+    image: aerokube/ggr:1.7.2
+    ports:
+      - 4445:4444
+    network_mode: bridge
+    volumes:
+      - ./config/quota:/etc/grid-router/quota
+      - $PWD/config/users.htpasswd:/etc/grid-router/users.htpasswd
+    links:
+      - selenoid
