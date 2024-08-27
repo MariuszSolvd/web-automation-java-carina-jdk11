@@ -18,7 +18,7 @@ import com.solvd.utilities.EmployeeWrapper;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.List;
 
@@ -26,16 +26,16 @@ import static org.testng.Assert.*;
 
 public class WebTest extends AbstractTest {
 
-//    @BeforeClass
-//    @Parameters({"browser"})
-//    public void setUp(String browser) {
-//        R.CONFIG.put("capabilities.browserName", browser);
-//    }
+    @BeforeClass
+    @Parameters({"browser"})
+    public void setUp(String browser) {
+        R.CONFIG.put("capabilities.browserName", browser);
+    }
 
 
 
     //Test case 1
-    @Test(testName = "T1", threadPoolSize = 1, invocationCount = 3)
+    @Test(testName = "T1", threadPoolSize = 1)
     public void shouldLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
@@ -45,7 +45,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 2
-    @Test(testName = "T2", threadPoolSize = 1, invocationCount = 3)
+    @Test(testName = "T2", threadPoolSize = 1)
     public void shouldNotLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
@@ -55,7 +55,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1, invocationCount = 3)
+    @Test(testName = "T3", threadPoolSize = 1)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
         PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
@@ -73,7 +73,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 4
-    @Test(testName = "T4", threadPoolSize = 1, invocationCount = 2)
+    @Test(testName = "T4", threadPoolSize = 1)
     public void shouldDeleteEmployee() {
         LoginService loginService = new LoginService();
         PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
@@ -96,7 +96,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 5
-    @Test(testName = "T5", threadPoolSize = 1, invocationCount = 3)
+    @Test(testName = "T5", threadPoolSize = 1)
     public void shouldAddJobTitle() {
         LoginService loginService = new LoginService();
         AdminPageBase adminPage = loginService.successfulLogin(AdminPageBase.class);
@@ -116,11 +116,10 @@ public class WebTest extends AbstractTest {
         assertTrue(jobList.contains(jobToAdd));
     }
 
-//    @AfterClass
-//    public void tearDown() {
-//        if (getDriver() != null) {
-//            getDriver().quit();
-//        }
-//    }
-
+    @AfterClass
+    public void tearDown() {
+        if (getDriver() != null) {
+            getDriver().quit();
+        }
+    }
 }
