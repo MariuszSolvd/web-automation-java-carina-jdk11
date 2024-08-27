@@ -31,13 +31,8 @@ build/
 ### Mac OS ###
 .DS_Store
 
-### After Docker ###
 app.log
 reports/
-.mvn/
+
 config/
 var/
-Dockerfile
-docker-compose.yaml
-mvnw.cmd
-mvnw
