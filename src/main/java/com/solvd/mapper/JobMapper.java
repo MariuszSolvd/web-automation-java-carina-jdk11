@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JobMapper {
 
@@ -20,12 +21,12 @@ public class JobMapper {
     public static List<Job> mapJobsToListDesktop(List<ExtendedWebElement> elements) {
         return elements.stream()
                 .map(JobMapper::mapToJobFromWebElementDesktop)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private static Job mapToJobFromWebElementMobile(WebElement webElement) {
         List<WebElement> cells = webElement.findElements(By.xpath(".//div[@class='card-center']/*"));
-        String[] titles = cells.getFirst().getText().split("[\n\r]");
+        String[] titles = cells.get(0).getText().split("[\n\r]");
         String[] descriptions = cells.get(1).getText().split("[\n\r]");
         String description = null;
         if (descriptions.length > 1) {
@@ -40,6 +41,6 @@ public class JobMapper {
     public static List<Job> mapJobsToListMobile(List<ExtendedWebElement> elements) {
         return elements.stream()
                 .map(JobMapper::mapToJobFromWebElementMobile)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

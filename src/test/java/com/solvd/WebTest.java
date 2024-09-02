@@ -82,8 +82,8 @@ public class WebTest extends AbstractTest {
         //Get list from PIM Page
         List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
         //Get element to delete
-        Employee employeeToDelete = pimPage.mapToEmployee(employeeElementList.getFirst());
-        EmployeeWrapper employeeWrapper = new EmployeeWrapper(employeeElementList.getFirst());
+        Employee employeeToDelete = pimPage.mapToEmployee(employeeElementList.get(0));
+        EmployeeWrapper employeeWrapper = new EmployeeWrapper(employeeElementList.get(0));
         employeeWrapper.clickDeleteButton();
         pimPage.clickDeleteConfirmationButton();
         //Search for deleted employee
