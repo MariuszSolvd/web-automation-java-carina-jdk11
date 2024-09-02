@@ -14,11 +14,11 @@ services:
   selenoid-ui:
     image: aerokube/selenoid-ui:1.10.11
     ports:
-      - 8080:8080
+      - 8090:8090
     network_mode: bridge
     links:
       - selenoid
-    command: ["--selenoid-uri", "http://selenoid:4444"]
+    command: ["--selenoid-uri", "http://selenoid:4444", "-listen", ":8090"]
 
   ggr:
     image: aerokube/ggr:1.7.2
