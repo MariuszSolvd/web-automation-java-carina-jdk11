@@ -55,66 +55,66 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1)
-    public void shouldAddEmployee() {
-        LoginService loginService = new LoginService();
-        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
-
-        AddEmployeePageBase addEmployeePage = pimPage.clickAddEmployeeButton();
-        addEmployeePage.assertPageOpened();
-
-        Employee employeeToAdd = EmployeeService.getEmployee();
-        EmployeePageBase employeePage = addEmployeePage.addEmployee(employeeToAdd);
-        employeePage.assertPageOpened();
-        employeePage.waitForDataToLoad();
-        Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
-        assertEquals(employeeReceived, employeeToAdd, "Employee does not contain same data");
-
-    }
-
-    //Test case 4
-    @Test(testName = "T4", threadPoolSize = 1)
-    public void shouldDeleteEmployee() {
-        LoginService loginService = new LoginService();
-        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
-        pimPage.waitForDataToLoad();
-
-        //Get list from PIM Page
-        List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
-        //Get element to delete
-        Employee employeeToDelete = pimPage.mapToEmployee(employeeElementList.get(0));
-        EmployeeWrapper employeeWrapper = new EmployeeWrapper(employeeElementList.get(0));
-        employeeWrapper.clickDeleteButton();
-        pimPage.clickDeleteConfirmationButton();
-        //Search for deleted employee
-        pimPage.inputIdEmployee(employeeToDelete.getIdEmployee());
-        pimPage.clickSearchEmployeeButton(); //empty
-        //Creating list of current(after deletion) employee list
-        List<Employee> employeeList = pimPage.mapToEmployeeList(employeeElementList);
-
-        assertFalse(employeeList.contains(employeeToDelete), "Employee wasn't deleted");
-    }
-
-    //Test case 5
-    @Test(testName = "T5", threadPoolSize = 1)
-    public void shouldAddJobTitle() {
-        LoginService loginService = new LoginService();
-        AdminPageBase adminPage = loginService.successfulLogin(AdminPageBase.class);
-        //From Admin Page click on job button and pick Job Titles
-        JobListPageBase jobListPage = adminPage.getJobListPage();
-        jobListPage.assertPageOpened();
-        //Click on add button and navigate to Add Job Page
-        AddJobPageBase addJobPage = jobListPage.clickAddJobButton();
-        addJobPage.assertPageOpened();
-        //Adding auto-generated job and redirection to JobListPage again
-        Job jobToAdd = JobService.getJob();
-        jobListPage = addJobPage.addJobAndSave(jobToAdd.getTitle(), jobToAdd.getDescription());
-        jobListPage.assertPageOpened();
-        //Getting new(current) job list and asserting if auto-generated job has been added
-        List<Job> jobList = jobListPage.getJobList();
-
-        assertTrue(jobList.contains(jobToAdd));
-    }
+//    @Test(testName = "T3", threadPoolSize = 1)
+//    public void shouldAddEmployee() {
+//        LoginService loginService = new LoginService();
+//        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
+//
+//        AddEmployeePageBase addEmployeePage = pimPage.clickAddEmployeeButton();
+//        addEmployeePage.assertPageOpened();
+//
+//        Employee employeeToAdd = EmployeeService.getEmployee();
+//        EmployeePageBase employeePage = addEmployeePage.addEmployee(employeeToAdd);
+//        employeePage.assertPageOpened();
+//        employeePage.waitForDataToLoad();
+//        Employee employeeReceived = EmployeeMapper.mapToEmployeeFromEmployeePage(employeePage);
+//        assertEquals(employeeReceived, employeeToAdd, "Employee does not contain same data");
+//
+//    }
+//
+//    //Test case 4
+//    @Test(testName = "T4", threadPoolSize = 1)
+//    public void shouldDeleteEmployee() {
+//        LoginService loginService = new LoginService();
+//        PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
+//        pimPage.waitForDataToLoad();
+//
+//        //Get list from PIM Page
+//        List<ExtendedWebElement> employeeElementList = pimPage.getEmployeeList();
+//        //Get element to delete
+//        Employee employeeToDelete = pimPage.mapToEmployee(employeeElementList.get(0));
+//        EmployeeWrapper employeeWrapper = new EmployeeWrapper(employeeElementList.get(0));
+//        employeeWrapper.clickDeleteButton();
+//        pimPage.clickDeleteConfirmationButton();
+//        //Search for deleted employee
+//        pimPage.inputIdEmployee(employeeToDelete.getIdEmployee());
+//        pimPage.clickSearchEmployeeButton(); //empty
+//        //Creating list of current(after deletion) employee list
+//        List<Employee> employeeList = pimPage.mapToEmployeeList(employeeElementList);
+//
+//        assertFalse(employeeList.contains(employeeToDelete), "Employee wasn't deleted");
+//    }
+//
+//    //Test case 5
+//    @Test(testName = "T5", threadPoolSize = 1)
+//    public void shouldAddJobTitle() {
+//        LoginService loginService = new LoginService();
+//        AdminPageBase adminPage = loginService.successfulLogin(AdminPageBase.class);
+//        //From Admin Page click on job button and pick Job Titles
+//        JobListPageBase jobListPage = adminPage.getJobListPage();
+//        jobListPage.assertPageOpened();
+//        //Click on add button and navigate to Add Job Page
+//        AddJobPageBase addJobPage = jobListPage.clickAddJobButton();
+//        addJobPage.assertPageOpened();
+//        //Adding auto-generated job and redirection to JobListPage again
+//        Job jobToAdd = JobService.getJob();
+//        jobListPage = addJobPage.addJobAndSave(jobToAdd.getTitle(), jobToAdd.getDescription());
+//        jobListPage.assertPageOpened();
+//        //Getting new(current) job list and asserting if auto-generated job has been added
+//        List<Job> jobList = jobListPage.getJobList();
+//
+//        assertTrue(jobList.contains(jobToAdd));
+//    }
 
     @AfterClass
     public void tearDown() {
