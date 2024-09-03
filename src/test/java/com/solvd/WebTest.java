@@ -35,7 +35,7 @@ public class WebTest extends AbstractTest {
 
 
     //Test case 1
-    @Test(testName = "T1", threadPoolSize = 1)
+    @Test(testName = "T1", threadPoolSize = 1, priority = 1)
     public void shouldLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
@@ -45,7 +45,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 2
-    @Test(testName = "T2", threadPoolSize = 1)
+    @Test(testName = "T2", threadPoolSize = 1, priority = 2)
     public void shouldNotLogin() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         loginPage.open();
@@ -55,7 +55,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 3
-    @Test(testName = "T3", threadPoolSize = 1)
+    @Test(testName = "T3", threadPoolSize = 1, priority = 3)
     public void shouldAddEmployee() {
         LoginService loginService = new LoginService();
         PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
@@ -73,7 +73,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 4
-    @Test(testName = "T4", threadPoolSize = 1)
+    @Test(testName = "T4", threadPoolSize = 1, priority = 4)
     public void shouldDeleteEmployee() {
         LoginService loginService = new LoginService();
         PimPageBase pimPage = loginService.successfulLogin(PimPageBase.class);
@@ -96,7 +96,7 @@ public class WebTest extends AbstractTest {
     }
 
     //Test case 5
-    @Test(testName = "T5", threadPoolSize = 1)
+    @Test(testName = "T5", threadPoolSize = 1, priority = 5)
     public void shouldAddJobTitle() {
         LoginService loginService = new LoginService();
         AdminPageBase adminPage = loginService.successfulLogin(AdminPageBase.class);
