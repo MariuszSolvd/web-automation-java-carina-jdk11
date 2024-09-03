@@ -6,7 +6,7 @@
     <parameter name="jenkinsEnvironments" value="TEST"/>
     <parameter name="jenkinsRegressionPipeline" value="nightly_regression, full_regression"/>
     <parameter name="jenkinsRegressionPipeline" value="Web-Automation-Java-Carina-Regression"/>
-    <parameter name="jenkinsRegressionMatrix" value="branch:main;branch:demo"/>
+    <parameter name="jenkinsRegressionMatrix" value="branch:main,selenium_url:http://user:password@host.docker.internal:4445/wd/hub;branch:demo,selenium_url:http://user:password@host.docker.internal:4445/wd/hub"/>
 
     <test name="Firefox Test">
         <parameter name="browser" value="firefox"/>
