@@ -4,6 +4,9 @@
     <parameter name="jenkinsJobName" value="Web-Automation-Java-Carina"/>
     <parameter name="jenkinsJobType" value="web"/>
     <parameter name="jenkinsEnvironments" value="TEST"/>
+    <parameter name="jenkinsRegressionPipeline" value="nightly_regression, full_regression"/>
+    <parameter name="jenkinsRegressionPipeline" value="Web-Automation-Java-Carina-Regression"/>
+    <parameter name="jenkinsRegressionMatrix" value="env: TEST, branch: main; env:DEMO, branch: demo"/>
 
     <test name="Firefox Test">
         <parameter name="browser" value="firefox"/>
